@@ -1,0 +1,5 @@
+;/*FB_PKG_DELIM*/
+
+__d("GroupsCometSoleAdminLeaveFlowDialogPreloadQuery_facebookRelayOperation",[],(function(t,n,r,o,a,i){a.exports="24460695620295058"}),null);
+__d("GroupsCometSoleAdminLeaveFlowDialogPreloadQuery$Parameters",["GroupsCometSoleAdminLeaveFlowDialogPreloadQuery_facebookRelayOperation"],(function(t,n,r,o,a,i){"use strict";var e={kind:"PreloadableConcreteRequest",params:{id:n("GroupsCometSoleAdminLeaveFlowDialogPreloadQuery_facebookRelayOperation"),metadata:{},name:"GroupsCometSoleAdminLeaveFlowDialogPreloadQuery",operationKind:"query",text:null}};a.exports=e}),null);
+__d("GroupsCometSoleAdminLeaveFlowDialog.entrypoint",["GroupsCometSoleAdminLeaveFlowDialogPreloadQuery$Parameters","JSResourceForInteraction","WebPixelRatio"],(function(t,n,r,o,a,i,l){"use strict";var e={getPreloadProps:function(t){var e=t.groupID;return{queries:{queryReference:{parameters:r("GroupsCometSoleAdminLeaveFlowDialogPreloadQuery$Parameters"),variables:{groupID:e,scale:o("WebPixelRatio").get()}}}}},root:r("JSResourceForInteraction")("GroupsCometSoleAdminLeaveFlowDialog.react").__setRef("GroupsCometSoleAdminLeaveFlowDialog.entrypoint")};l.default=e}),98);

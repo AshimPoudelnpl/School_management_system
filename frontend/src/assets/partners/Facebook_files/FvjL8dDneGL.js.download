@@ -1,0 +1,3 @@
+;/*FB_PKG_DELIM*/
+
+__d("cometFormattedTextIneligibilityCheck",[],(function(t,n,r,o,a,i){"use strict";function e(e,t,n){var r,o;return t===void 0&&(t=130),n===void 0&&(n=3),((r=(o=e.match(/\n/g))==null?void 0:o.length)!=null?r:0)>=n||e.length>t}i.default=e}),66);

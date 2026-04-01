@@ -1,0 +1,11 @@
+;/*FB_PKG_DELIM*/
+
+__d("FBIconPennantFilled12.svg.react",["XPlatReactSVG","react"],(function(t,n,r,o,a,i,l){"use strict";var e,s=e||(e=o("react"));function u(e){return s.jsxs(o("XPlatReactSVG").Svg,babelHelpers.extends({viewBox:"0 0 12 13",width:"1em",height:"1em",fill:"currentColor",title:e.title},e,{children:[e.children!=null&&s.jsx(o("XPlatReactSVG").Defs,{children:e.children}),s.jsx(o("XPlatReactSVG").G,{fillRule:"evenodd",transform:"translate(-450 -1073)",children:s.jsx(o("XPlatReactSVG").Path,{d:"M455.816 1082.654a.5.5 0 0 1-.665-.242l-.326-.7a.5.5 0 1 1 .906-.422l.326.7a.5.5 0 0 1-.241.664m-1.3-2.286a.5.5 0 0 1-.453-.288l-.326-.7a.5.5 0 1 1 .906-.423l.327.7a.5.5 0 0 1-.453.711m-1.088-2.332a.5.5 0 0 1-.454-.29l-.326-.7a.5.5 0 1 1 .906-.422l.327.7a.5.5 0 0 1-.453.712m8.48-1.967a.958.958 0 0 0-.88-.57h-8.724l-.146-.313a.503.503 0 0 0-.665-.242l-.906.423a.5.5 0 0 0-.242.665l.685 1.468h-.531a.5.5 0 1 0 0 1h.125l-.15.2a.499.499 0 1 0 .8.6l.367-.49 1.72 3.69h-.862a.5.5 0 1 0 0 1h.125l-.15.2a.499.499 0 1 0 .8.6l.571-.762.76 1.629a.5.5 0 0 0 .664.242l.907-.423a.499.499 0 0 0 .241-.664l-.346-.743 5.685-6.46a.968.968 0 0 0 .153-1.05"})})]}))}u.displayName=u.name+" [from "+i.id+"]",u._isSVG=!0;var c=u;l.default=c}),98);
+__d("MWFDSAppGroups.svg.react",["cr:21527"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:21527")}),98);
+__d("MWFDSArrowsLeftRightCircle.svg.react",["cr:21544"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:21544")}),98);
+__d("MWFDSBusinessBriefcase.svg.react",["cr:21579"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:21579")}),98);
+__d("MWFDSGlobeAmericas.svg.react",["cr:21673"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:21673")}),98);
+__d("MWFDSLock.svg.react",["cr:21703"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:21703")}),98);
+__d("MWFDSNeighborhood.svg.react",["cr:21719"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:21719")}),98);
+__d("MWFDSPennant.svg.react",["FBIconPennantFilled12.svg.react"],(function(t,n,r,o,a,i,l){"use strict";l.default=r("FBIconPennantFilled12.svg.react")}),98);
+__d("MWFDSUnlock.svg.react",["cr:21815"],(function(t,n,r,o,a,i,l){"use strict";l.default=n("cr:21815")}),98);
