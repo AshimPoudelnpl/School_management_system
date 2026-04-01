@@ -18,7 +18,7 @@ const dropdownLinkClasses =
 const socialLinks = [
   {
     label: "Facebook",
-    href: "#",
+    href: "https://www.facebook.com/groups/187255265389347",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -167,6 +167,8 @@ const Navbar = () => {
                 key={label}
                 href={href}
                 aria-label={label}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noreferrer" : undefined}
                 className={socialLinkClasses}
               >
                 {icon}
@@ -309,6 +311,8 @@ const Navbar = () => {
                   key={label}
                   href={href}
                   aria-label={label}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noreferrer" : undefined}
                   className={socialLinkClasses}
                 >
                   {icon}
