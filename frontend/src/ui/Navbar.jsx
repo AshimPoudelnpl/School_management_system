@@ -1,10 +1,10 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { academicsDropdownItems, publicNavItems } from "../router/publicNavConfig";
 
 const desktopLinkClasses =
-  "whitespace-nowrap rounded-full px-2 py-1.5 text-[12px] font-semibold tracking-[0.01em] underline-offset-8 decoration-[1px] decoration-background-color transition-colors hover:text-background-color hover:underline xl:px-2.5 xl:py-2 xl:text-[13px] 2xl:px-4 2xl:py-2.5 2xl:text-[15px]";
+  "whitespace-nowrap rounded-full px-3 py-2 text-[13px] font-semibold tracking-[0.01em] underline-offset-8 decoration-[1px] decoration-background-color transition-colors hover:text-background-color hover:underline xl:px-3.5 xl:py-2.5 xl:text-[14px] 2xl:px-4 2xl:py-2.5 2xl:text-[15px]";
 
 const mobileLinkClasses =
   "block rounded-2xl px-4 py-3.5 text-[15px] font-semibold underline-offset-4 decoration-[1px] decoration-background-color transition-colors hover:text-background-color hover:underline";
@@ -67,6 +67,37 @@ const Navbar = () => {
     [location.pathname],
   );
 
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setIsAcademicsExpanded(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    const desktopMediaQuery = window.matchMedia("(min-width: 1024px)");
+
+    const handleViewportChange = (event) => {
+      if (event.matches) {
+        setIsMenuOpen(false);
+        setIsAcademicsExpanded(false);
+      }
+    };
+
+    handleViewportChange(desktopMediaQuery);
+    desktopMediaQuery.addEventListener("change", handleViewportChange);
+
+    return () => {
+      desktopMediaQuery.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
+
   const closeMenu = () => {
     setIsMenuOpen(false);
     setIsAcademicsExpanded(false);
@@ -74,29 +105,29 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[linear-gradient(135deg,var(--color-secondary-color),var(--color-primary-color))] text-white shadow-lg backdrop-blur-xl">
-      <div className="mx-auto flex w-full max-w-screen-2xl items-center justify-between gap-8 px-5 py-4 sm:px-8 lg:px-10 xl:px-14">
+      <div className="mx-auto flex w-full max-w-screen-2xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4 lg:px-8 xl:px-10 2xl:px-14">
         <Link
           to="/"
-          className="flex shrink-0 items-center gap-4"
+          className="flex min-w-0 shrink-0 items-center gap-3 sm:gap-4"
           onClick={closeMenu}
         >
           <img
             src={logo}
             alt="Western School logo"
-            className="h-14 w-auto object-contain sm:h-16"
+            className="h-12 w-auto shrink-0 object-contain sm:h-14 xl:h-16"
           />
-          <div className="leading-tight">
-            <p className="text-lg font-bold tracking-[0.08em] uppercase sm:text-xl">
+          <div className="min-w-0 leading-tight">
+            <p className="truncate text-base font-bold tracking-[0.08em] uppercase sm:text-lg xl:text-xl">
               Western E.M
             </p>
-            <p className="text-xs font-semibold tracking-[0.14em] text-background-color uppercase sm:text-sm">
+            <p className="truncate text-[10px] font-semibold tracking-[0.12em] text-background-color uppercase sm:text-xs xl:text-sm">
               Secondary School
             </p>
           </div>
         </Link>
 
-        <div className="hidden lg:ml-auto lg:flex lg:items-center lg:justify-end lg:gap-8">
-          <nav className="flex items-center justify-end gap-2 xl:gap-3">
+        <div className="hidden lg:ml-auto lg:flex lg:min-w-0 lg:items-center lg:justify-end lg:gap-3 xl:gap-4 2xl:gap-8">
+          <nav className="flex min-w-0 items-center justify-end gap-0.5 xl:gap-1.5 2xl:gap-2">
             {publicNavItems.map(({ path, label, children }) =>
               children ? (
                 <div key={path} className="group relative">
@@ -161,7 +192,7 @@ const Navbar = () => {
             )}
           </nav>
 
-          <div className="flex items-center gap-3 border-l border-white/20 pl-6">
+          <div className="hidden items-center gap-2 border-l border-white/20 pl-4 xl:flex xl:gap-3 xl:pl-6">
             {socialLinks.map(({ label, href, icon }) => (
               <a
                 key={label}
@@ -184,7 +215,7 @@ const Navbar = () => {
           }
           aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen((open) => !open)}
-          className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/25 bg-white/5 text-white transition hover:border-background-color hover:text-background-color lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/25 bg-white/5 text-white transition hover:border-background-color hover:text-background-color lg:hidden"
         >
           {isMenuOpen ? (
             <svg
@@ -222,7 +253,7 @@ const Navbar = () => {
 
       {isMenuOpen && (
         <div className="border-t border-white/10 bg-[linear-gradient(135deg,var(--color-secondary-color),var(--color-primary-color))] lg:hidden">
-          <div className="mx-auto flex max-w-screen-2xl flex-col gap-4 px-5 py-5 sm:px-8">
+          <div className="mx-auto max-h-[calc(100vh-4.75rem)] max-w-screen-2xl overflow-y-auto px-4 py-4 sm:px-6 sm:py-5">
             <nav className="flex flex-col gap-1">
               {publicNavItems.map(({ path, label, children }) =>
                 children ? (
@@ -305,7 +336,7 @@ const Navbar = () => {
               )}
             </nav>
 
-            <div className="flex items-center gap-3 border-t border-white/20 pt-4">
+            <div className="mt-4 flex items-center gap-3 border-t border-white/20 pt-4">
               {socialLinks.map(({ label, href, icon }) => (
                 <a
                   key={label}
