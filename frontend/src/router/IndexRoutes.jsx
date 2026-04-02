@@ -7,12 +7,10 @@ export const indexRouter = createBrowserRouter([
   {
     path: '/',
     element: <PublicLayout />,
-    children: [
-      ...PublicRoutes,
-      {
-        path: '*',
-        element: <NotFound />,
-      },
-    ],
+    children: PublicRoutes,
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ])
