@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
-import heroImage from "../assets/hero.png";
-import schoolBuilding from "../assets/school_image.jpeg";
+import { schoolBuilding } from "../assets";
 import admissionImage from "../assets/news_events/Addmission open.jpeg";
 import campusFieldImage from "../assets/news_events/download.jpeg";
 import studentMomentImage from "../assets/news_events/download (1).jpeg";
@@ -20,7 +18,7 @@ const galleryAlbums = [
     description:
       "A closer look at the school building, open grounds, and the welcoming learning environment at Western School.",
     coverImage: schoolBuilding,
-    photos: [schoolBuilding, heroImage, campusFieldImage],
+    photos: [schoolBuilding, campusFieldImage, studentMomentImage],
   },
   {
     id: 2,
@@ -38,7 +36,7 @@ const galleryAlbums = [
     description:
       "Important school notices and admission moments that welcome new students and families into the community.",
     coverImage: admissionImage,
-    photos: [admissionImage, schoolBuilding, heroImage],
+    photos: [admissionImage, schoolBuilding, assemblyImage],
   },
   {
     id: 4,
@@ -83,7 +81,7 @@ const galleryAlbums = [
     description:
       "Everyday moments that show how students learn, connect, and grow through school routines and activities.",
     coverImage: studentMomentImage,
-    photos: [studentMomentImage, heroImage, campusFieldImage],
+    photos: [studentMomentImage, tripImage, campusFieldImage],
   },
   {
     id: 9,
@@ -91,8 +89,8 @@ const galleryAlbums = [
     category: "Events",
     description:
       "Special occasions that highlight student participation, school spirit, and the joy of learning together.",
-    coverImage: heroImage,
-    photos: [heroImage, marchPassImage, admissionImage],
+    coverImage: assemblyImage,
+    photos: [assemblyImage, marchPassImage, admissionImage],
   },
 ];
 

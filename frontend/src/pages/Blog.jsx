@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import schoolBuilding from "../assets/school_image.jpeg";
+import { schoolBuilding } from "../assets";
 import admissionImage from "../assets/news_events/Addmission open.jpeg";
 import tripImage from "../assets/news_events/490101178_1145653737574206_2205984292387668726_n.jpg";
 import studentMomentImage from "../assets/news_events/download (1).jpeg";

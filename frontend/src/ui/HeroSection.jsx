@@ -1,5 +1,4 @@
 import React from "react";
-import heroPoster from "../assets/hero.png";
 import campusVideo from "../assets/Rai School FINAL- 45mb for Website.mp4";
 
 const HeroSection = () => {
@@ -12,7 +11,6 @@ const HeroSection = () => {
           muted
           loop
           playsInline
-          poster={heroPoster}
           preload="metadata"
           aria-hidden="true"
         >

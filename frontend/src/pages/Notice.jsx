@@ -1,6 +1,4 @@
 import React, { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
-import heroImage from "../assets/news_events/Addmission open.jpeg";
 
 const noticeItems = [
   {

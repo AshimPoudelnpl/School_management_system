@@ -1,19 +1,19 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { academicsDropdownItems, publicNavItems } from "../router/publicNavConfig";
 
 const desktopLinkClasses =
-  "whitespace-nowrap rounded-full px-4 py-2.5 text-[15px] font-semibold tracking-[0.01em] underline-offset-8 decoration-[1px] decoration-background-color transition-colors hover:bg-white/10 hover:text-background-color hover:underline";
+  "whitespace-nowrap rounded-full px-2.5 py-2 text-[14px] font-semibold tracking-[0.01em] underline-offset-8 decoration-[1px] decoration-background-color transition-colors hover:text-background-color hover:underline 2xl:px-4 2xl:py-2.5 2xl:text-[15px]";
 
 const mobileLinkClasses =
-  "block rounded-2xl px-4 py-3.5 text-[15px] font-semibold underline-offset-4 decoration-[1px] decoration-background-color transition-colors hover:bg-white/10 hover:text-background-color hover:underline";
+  "block rounded-2xl px-4 py-3.5 text-[15px] font-semibold underline-offset-4 decoration-[1px] decoration-background-color transition-colors hover:text-background-color hover:underline";
 
 const socialLinkClasses =
-  "inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition hover:border-background-color hover:bg-white/12 hover:text-background-color";
+  "inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition hover:border-background-color hover:bg-white/12 hover:text-background-color 2xl:h-10 2xl:w-10";
 
 const dropdownLinkClasses =
-  "block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 hover:text-secondary-color";
+  "block rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 transition hover:text-secondary-color";
 
 const socialLinks = [
   {
@@ -67,6 +67,37 @@ const Navbar = () => {
     [location.pathname],
   );
 
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setIsAcademicsExpanded(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    const desktopMediaQuery = window.matchMedia("(min-width: 1280px)");
+
+    const handleViewportChange = (event) => {
+      if (event.matches) {
+        setIsMenuOpen(false);
+        setIsAcademicsExpanded(false);
+      }
+    };
+
+    handleViewportChange(desktopMediaQuery);
+    desktopMediaQuery.addEventListener("change", handleViewportChange);
+
+    return () => {
+      desktopMediaQuery.removeEventListener("change", handleViewportChange);
+    };
+  }, []);
+
   const closeMenu = () => {
     setIsMenuOpen(false);
     setIsAcademicsExpanded(false);
@@ -74,38 +105,38 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[linear-gradient(135deg,var(--color-secondary-color),var(--color-primary-color))] text-white shadow-lg backdrop-blur-xl">
-      <div className="mx-auto flex w-full max-w-screen-2xl items-center justify-between gap-8 px-5 py-4 sm:px-8 lg:px-10 xl:px-14">
+      <div className="mx-auto flex w-full max-w-screen-2xl items-center justify-between gap-3 px-4 py-3 sm:gap-6 sm:px-6 sm:py-4 lg:px-8 xl:px-10 2xl:px-14">
         <Link
           to="/"
-          className="flex shrink-0 items-center gap-4"
+          className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4 xl:flex-none"
           onClick={closeMenu}
         >
           <img
             src={logo}
             alt="Western School logo"
-            className="h-14 w-auto object-contain sm:h-16"
+            className="h-12 w-auto shrink-0 object-contain sm:h-14 2xl:h-16"
           />
-          <div className="leading-tight">
-            <p className="text-lg font-bold tracking-[0.08em] uppercase sm:text-xl">
+          <div className="min-w-0 leading-tight">
+            <p className="truncate text-base font-bold tracking-[0.06em] uppercase sm:text-lg xl:text-xl">
               Western E.M
             </p>
-            <p className="text-xs font-semibold tracking-[0.14em] text-background-color uppercase sm:text-sm">
+            <p className="truncate text-[11px] font-semibold tracking-[0.12em] text-background-color uppercase sm:text-xs xl:text-sm">
               Secondary School
             </p>
           </div>
         </Link>
 
-        <div className="hidden lg:ml-auto lg:flex lg:items-center lg:justify-end lg:gap-8">
-          <nav className="flex items-center justify-end gap-2 xl:gap-3">
+        <div className="hidden xl:ml-auto xl:flex xl:min-w-0 xl:items-center xl:justify-end xl:gap-4 2xl:gap-8">
+          <nav className="flex min-w-0 items-center justify-end gap-0.5 2xl:gap-2">
             {publicNavItems.map(({ path, label, children }) =>
               children ? (
-                <div key={path} className="group relative">
+                <div key={path} className="group relative shrink-0">
                   <Link
                     to={path}
                     onClick={closeMenu}
                     className={`${desktopLinkClasses} inline-flex items-center gap-2 ${
                       academicsActive
-                        ? "bg-white/10 text-white underline"
+                        ? "text-white underline"
                         : "text-white/90"
                     }`}
                   >
@@ -134,7 +165,7 @@ const Navbar = () => {
                         onClick={closeMenu}
                         className={({ isActive }) =>
                           `${dropdownLinkClasses} ${
-                            isActive ? "bg-slate-100 text-secondary-color" : ""
+                            isActive ? "text-secondary-color underline" : ""
                           }`
                         }
                       >
@@ -151,7 +182,7 @@ const Navbar = () => {
                   onClick={closeMenu}
                   className={({ isActive }) =>
                     `${desktopLinkClasses} ${
-                      isActive ? "bg-white/10 text-white underline" : "text-white/90"
+                      isActive ? "text-white underline" : "text-white/90"
                     }`
                   }
                 >
@@ -161,7 +192,7 @@ const Navbar = () => {
             )}
           </nav>
 
-          <div className="flex items-center gap-3 border-l border-white/20 pl-6">
+          <div className="hidden items-center gap-3 border-l border-white/20 pl-6 2xl:flex">
             {socialLinks.map(({ label, href, icon }) => (
               <a
                 key={label}
@@ -184,7 +215,7 @@ const Navbar = () => {
           }
           aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen((open) => !open)}
-          className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/25 bg-white/5 text-white transition hover:border-background-color hover:text-background-color lg:hidden"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/25 bg-white/5 text-white transition hover:border-background-color hover:text-background-color xl:hidden"
         >
           {isMenuOpen ? (
             <svg
@@ -221,103 +252,105 @@ const Navbar = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="border-t border-white/10 bg-[linear-gradient(135deg,var(--color-secondary-color),var(--color-primary-color))] lg:hidden">
-          <div className="mx-auto flex max-w-screen-2xl flex-col gap-4 px-5 py-5 sm:px-8">
-            <nav className="flex flex-col gap-1">
-              {publicNavItems.map(({ path, label, children }) =>
-                children ? (
-                  <div key={path} className="rounded-2xl border border-white/10 bg-white/5 p-2">
-                    <div className="flex items-center gap-2">
-                      <Link
-                        to={path}
-                        onClick={closeMenu}
-                        className={`${mobileLinkClasses} flex-1 ${
-                          academicsActive ? "bg-white/10 text-white underline" : "text-white/90"
-                        }`}
-                      >
-                        {label}
-                      </Link>
-                      <button
-                        type="button"
-                        onClick={() => setIsAcademicsExpanded((open) => !open)}
-                        aria-label={
-                          isAcademicsExpanded
-                            ? "Collapse academics submenu"
-                            : "Expand academics submenu"
-                        }
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 text-white transition hover:bg-white/10"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className={`h-4 w-4 transition ${
-                            isAcademicsExpanded ? "rotate-180" : ""
+        <div className="border-t border-white/10 bg-[linear-gradient(135deg,var(--color-secondary-color),var(--color-primary-color))] xl:hidden">
+          <div className="mx-auto max-h-[calc(100vh-4.75rem)] max-w-screen-2xl overflow-y-auto px-4 py-4 sm:px-6 sm:py-5 lg:px-8">
+            <div className="flex flex-col gap-4 pb-2">
+              <nav className="flex flex-col gap-1">
+                {publicNavItems.map(({ path, label, children }) =>
+                  children ? (
+                    <div key={path} className="rounded-2xl border border-white/10 bg-white/5 p-2">
+                      <div className="flex items-center gap-2">
+                        <Link
+                          to={path}
+                          onClick={closeMenu}
+                          className={`${mobileLinkClasses} flex-1 ${
+                            academicsActive ? "text-white underline" : "text-white/90"
                           }`}
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth="1.8"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m6 9 6 6 6-6"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-
-                    {isAcademicsExpanded && (
-                      <div className="mt-2 flex flex-col gap-1 border-t border-white/10 pt-2">
-                        {academicsDropdownItems.map((child) => (
-                          <NavLink
-                            key={child.path}
-                            to={child.path}
-                            onClick={closeMenu}
-                            className={({ isActive }) =>
-                              `block rounded-xl px-4 py-3 text-sm font-semibold transition ${
-                                isActive
-                                  ? "bg-white/10 text-white underline underline-offset-4"
-                                  : "text-white/85 hover:bg-white/10 hover:text-background-color"
-                              }`
-                            }
+                          {label}
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() => setIsAcademicsExpanded((open) => !open)}
+                          aria-label={
+                            isAcademicsExpanded
+                              ? "Collapse academics submenu"
+                              : "Expand academics submenu"
+                          }
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 text-white transition hover:bg-white/10"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={`h-4 w-4 transition ${
+                              isAcademicsExpanded ? "rotate-180" : ""
+                            }`}
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
                           >
-                            {child.label}
-                          </NavLink>
-                        ))}
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m6 9 6 6 6-6"
+                            />
+                          </svg>
+                        </button>
                       </div>
-                    )}
-                  </div>
-                ) : (
-                  <NavLink
-                    key={path}
-                    to={path}
-                    end={path === "/"}
-                    onClick={closeMenu}
-                    className={({ isActive }) =>
-                      `${mobileLinkClasses} ${
-                        isActive ? "bg-white/10 text-white underline" : "text-white/90"
-                      }`
-                    }
-                  >
-                    {label}
-                  </NavLink>
-                ),
-              )}
-            </nav>
 
-            <div className="flex items-center gap-3 border-t border-white/20 pt-4">
-              {socialLinks.map(({ label, href, icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noreferrer" : undefined}
-                  className={socialLinkClasses}
-                >
-                  {icon}
-                </a>
-              ))}
+                      {isAcademicsExpanded && (
+                        <div className="mt-2 flex flex-col gap-1 border-t border-white/10 pt-2">
+                          {academicsDropdownItems.map((child) => (
+                            <NavLink
+                              key={child.path}
+                              to={child.path}
+                              onClick={closeMenu}
+                              className={({ isActive }) =>
+                                `block rounded-xl px-4 py-3 text-sm font-semibold transition ${
+                                  isActive
+                                    ? "text-white underline underline-offset-4"
+                                    : "text-white/85 hover:text-background-color"
+                                }`
+                              }
+                            >
+                              {child.label}
+                            </NavLink>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <NavLink
+                      key={path}
+                      to={path}
+                      end={path === "/"}
+                      onClick={closeMenu}
+                      className={({ isActive }) =>
+                        `${mobileLinkClasses} ${
+                          isActive ? "text-white underline" : "text-white/90"
+                        }`
+                      }
+                    >
+                      {label}
+                    </NavLink>
+                  ),
+                )}
+              </nav>
+
+              <div className="flex items-center justify-center gap-3 border-t border-white/20 pt-4 sm:justify-start">
+                {socialLinks.map(({ label, href, icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={href.startsWith("http") ? "noreferrer" : undefined}
+                    className={socialLinkClasses}
+                  >
+                    {icon}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>

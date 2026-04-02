@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-import heroImage from "../assets/news_events/download (1).jpeg";
 
 const vacancyItems = [
   {

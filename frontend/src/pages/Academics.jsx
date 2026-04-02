@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import schoolBuilding from "../assets/school_image.jpeg";
+import { schoolBuilding } from "../assets";
 import { academicsDropdownItems } from "../router/publicNavConfig";
 
 const academicsDescriptions = {

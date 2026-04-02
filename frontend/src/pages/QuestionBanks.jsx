@@ -1,5 +1,5 @@
 import React from "react";
-import schoolBuilding from "../assets/school_image.jpeg";
+import { schoolBuilding } from "../assets";
 
 const questionBankGroups = [
   {

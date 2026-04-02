@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
-import schoolBuilding from "../assets/school_image.jpeg";
+import { schoolBuilding } from "../assets";
 import campusTourImage from "../assets/news_events/490101178_1145653737574206_2205984292387668726_n.jpg";
 import eventImage from "../assets/news_events/images.jpeg";
 

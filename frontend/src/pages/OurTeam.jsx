@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
-import heroImage from "../assets/hero.png";
-import schoolBuilding from "../assets/school_image.jpeg";
+import { schoolBuilding } from "../assets";
 import admissionImage from "../assets/news_events/Addmission open.jpeg";
 import campusImage from "../assets/news_events/download.jpeg";
 import studentMomentImage from "../assets/news_events/download (1).jpeg";
@@ -125,33 +124,12 @@ const OurTeam = () => {
 
   return (
     <div className="w-full">
-      <section className="relative flex h-64 items-center justify-center overflow-hidden sm:h-80">
-        <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt="Western School team"
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.78),rgba(0,111,214,0.6))]" />
-
-        <div className="relative z-10 px-4 text-center text-white">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue-200">
-            Our Team
-          </p>
-          <h1 className="mt-4 text-4xl font-black sm:text-5xl">Our Team</h1>
-          <p className="mt-3 text-base text-slate-200 sm:text-lg">
-            Dedicated people supporting learning, care, and student growth
-          </p>
-        </div>
-      </section>
-
       <section className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 text-center">
-            <h2 className="text-3xl font-black text-slate-900 sm:text-4xl">
-              Meet Our Team
-            </h2>
+            <h1 className="text-3xl font-black text-slate-900 sm:text-4xl">
+              Our Team
+            </h1>
             <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
               Western School is supported by committed teams who guide
               academics, operations, student wellbeing, and school activities
