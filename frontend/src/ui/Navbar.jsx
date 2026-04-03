@@ -128,8 +128,8 @@ const Navbar = () => {
     <>
       {/* ── TOP INFO BAR ── */}
       <div className="sticky top-0 z-50 bg-[#1a3a6e] text-slate-200 text-[12.5px]">
-        <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-2 py-1.5 sm:px-6 lg:px-10">
-          <div className="flex items-center gap-5">
+        <div className="mx-auto flex max-w-screen-2xl flex-col gap-2 px-2 py-1.5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-10">
+          <div className="flex flex-wrap justify-center gap-4 sm:justify-start">
             <span className="flex items-center gap-1.5">
               <svg
                 className="h-3.5 w-3.5 fill-current text-yellow-300"
@@ -149,7 +149,7 @@ const Navbar = () => {
               9848940309
             </span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <NepaliDate />
             <span className="text-white/30">|</span>
             {socialLinks.map(({ label, href, icon }) => (
@@ -170,7 +170,7 @@ const Navbar = () => {
 
       {/* ── SCHOOL IDENTITY HEADER — CENTERED ── */}
       <div className="bg-white border-b border-slate-200">
-        <div className="mx-auto flex max-w-screen-2xl items-center px-6 py-4 lg:px-10 gap-4">
+        <div className="mx-auto flex max-w-screen-2xl flex-col items-center gap-4 px-6 py-4 lg:flex-row lg:items-center lg:px-10">
           {/* Left: School Logo */}
           <Link to="/" onClick={closeMenu} className="shrink-0 ml-10 sm:ml-16">
             <img
