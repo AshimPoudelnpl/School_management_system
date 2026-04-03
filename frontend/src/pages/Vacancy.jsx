@@ -1,73 +1,5 @@
 import React, { useMemo, useState } from "react";
-
-const vacancyItems = [
-  {
-    id: 1,
-    title: "English Teacher",
-    status: "Open",
-    postedDate: "2026-03-24",
-    applicationDeadline: "2026-04-20",
-    department: "Academics",
-    location: "Kohalpur, Banke",
-    employmentType: "Full Time",
-    description:
-      "Western School is looking for a dedicated English teacher who can support strong classroom learning, communication development, and student confidence.",
-    requirements: [
-      "Strong subject knowledge and clear classroom delivery",
-      "Ability to guide students with care and discipline",
-      "Good communication and teamwork skills",
-    ],
-  },
-  {
-    id: 2,
-    title: "Science Lab Assistant",
-    status: "Open",
-    postedDate: "2026-03-18",
-    applicationDeadline: "2026-04-16",
-    department: "Learning Support",
-    location: "Kohalpur, Banke",
-    employmentType: "Full Time",
-    description:
-      "We are seeking a lab assistant to help maintain practical learning resources and support safe, organized science sessions for students.",
-    requirements: [
-      "Basic science lab management knowledge",
-      "Organized and responsible working approach",
-      "Supportive attitude toward teachers and students",
-    ],
-  },
-  {
-    id: 3,
-    title: "Front Desk And Administration Officer",
-    status: "Open",
-    postedDate: "2026-03-12",
-    applicationDeadline: "2026-04-12",
-    department: "Administration",
-    location: "Kohalpur, Banke",
-    employmentType: "Full Time",
-    description:
-      "This role supports school communication, admissions follow-up, office coordination, and everyday interaction with students and families.",
-    requirements: [
-      "Professional communication and office handling skills",
-      "Friendly and organized front-desk presence",
-      "Confidence in school record and document support",
-    ],
-  },
-  {
-    id: 4,
-    title: "Physical Education Instructor",
-    status: "Closed",
-    postedDate: "2026-02-15",
-    applicationDeadline: "2026-03-10",
-    department: "Student Support",
-    location: "Kohalpur, Banke",
-    employmentType: "Full Time",
-    description:
-      "This position supported student fitness, sports participation, and physical activity programs across the school.",
-    requirements: [
-      "Experience in sports coaching or school physical education",
-    ],
-  },
-];
+import { useGetVacancyQuery, useGetVacancyCategoriesQuery } from "../redux/features/contentSlice";
 
 const SearchIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
@@ -173,10 +105,7 @@ const BriefcaseIcon = () => (
 );
 
 const formatDate = (dateString) => {
-  if (!dateString) {
-    return "Not specified";
-  }
-
+  if (!dateString) return "Not specified";
   return new Date(dateString).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -185,124 +114,184 @@ const formatDate = (dateString) => {
 };
 
 const Vacancy = () => {
+  const { data: vacancyData, isLoading: vacancyLoading } = useGetVacancyQuery();
+  const { data: categoriesData, isLoading: categoriesLoading } = useGetVacancyCategoriesQuery();
+  
   const [searchQuery, setSearchQuery] = useState("");
 
+  const vacancies = vacancyData?.data ?? [];
+  const categories = categoriesData?.data ?? [];
+
   const filteredVacancies = useMemo(() => {
-    return vacancyItems.filter((job) => {
+    return vacancies.filter((job) => {
       const isOpen = job.status.toLowerCase() === "open";
       const query = searchQuery.toLowerCase();
       const matchesSearch =
         job.title.toLowerCase().includes(query) ||
-        job.description.toLowerCase().includes(query) ||
-        job.department.toLowerCase().includes(query);
+        job.description.toLowerCase().includes(query);
 
       return isOpen && matchesSearch;
     });
-  }, [searchQuery]);
+  }, [vacancies, searchQuery]);
+
+  if (vacancyLoading || categoriesLoading) {
+    return (
+      <div className="w-full bg-slate-50">
+        <section className="px-4 py-12 sm:px-6 lg:px-10">
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full bg-slate-50">
-     
       <section className="px-4 py-12 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-6xl">
-          
+          {/* Header */}
+          <div className="text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary-color">
+              Career Opportunities
+            </p>
+            <h1 className="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">
+              Join Our Team at Western School
+            </h1>
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+              Explore open positions and become part of our dedicated educational community.
+            </p>
+          </div>
 
-         
+          {/* Search */}
+          <div className="mt-10 mx-auto max-w-md">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <SearchIcon />
+              </div>
+              <input
+                type="text"
+                placeholder="Search positions..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-lg focus:ring-2 focus:ring-secondary-color focus:border-transparent"
+              />
+            </div>
+          </div>
 
           {filteredVacancies.length > 0 ? (
             <>
               <div className="mt-10 space-y-8">
-                {filteredVacancies.map((job) => (
-                  <article
-                    key={job.id}
-                    className="overflow-hidden border border-slate-200 bg-white shadow-lg shadow-slate-200/60 transition duration-300 hover:shadow-xl"
-                  >
-                    <div className="p-8">
-                      <div className="mb-6">
-                        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                          <div className="flex items-start gap-4">
-                            <div className="flex h-14 w-14 items-center justify-center bg-secondary-color/10 text-secondary-color">
-                              <BriefcaseIcon />
+                {filteredVacancies.map((job) => {
+                  const category = categories.find(cat => cat.category_id === job.category_id);
+                  const isExpired = new Date(job.application_deadline) < new Date();
+
+                  return (
+                    <article
+                      key={job.id}
+                      className="overflow-hidden border border-slate-200 bg-white shadow-lg shadow-slate-200/60 transition duration-300 hover:shadow-xl"
+                    >
+                      <div className="p-8">
+                        <div className="mb-6">
+                          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                            <div className="flex items-start gap-4">
+                              <div className="flex h-14 w-14 items-center justify-center bg-secondary-color/10 text-secondary-color">
+                                <BriefcaseIcon />
+                              </div>
+                              <div>
+                                <h3 className="text-2xl font-black capitalize text-slate-900">
+                                  {job.title}
+                                </h3>
+                                <div className="mt-2 flex items-center gap-3">
+                                  <span className={`inline-flex px-4 py-1 text-sm font-semibold ${
+                                    isExpired 
+                                      ? "bg-red-100 text-red-800" 
+                                      : "bg-emerald-100 text-emerald-800"
+                                  }`}>
+                                    {isExpired ? "Application Closed" : "Open Position"}
+                                  </span>
+                                  {category && (
+                                    <span className="inline-flex rounded-full bg-primary-color/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-primary-color">
+                                      {category.category_name}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
                             </div>
-                            <div>
-                              <h3 className="text-2xl font-black capitalize text-slate-900">
-                                {job.title}
-                              </h3>
-                              <span className="mt-2 inline-flex bg-emerald-100 px-4 py-1 text-sm font-semibold text-emerald-800">
-                                Open Position
+
+                            <span className="inline-flex border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold uppercase tracking-[0.14em] text-slate-600">
+                              Full Time
+                            </span>
+                          </div>
+
+                          <div className="mt-5 grid gap-4 text-sm text-slate-600 md:grid-cols-2 xl:grid-cols-3">
+                            <div className="flex items-center gap-2">
+                              <span className="text-secondary-color">
+                                <CalendarIcon />
+                              </span>
+                              <span>
+                                <strong>Posted:</strong> {formatDate(job.posted_date)}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className={isExpired ? "text-red-500" : "text-primary-color"}>
+                                <ClockIcon />
+                              </span>
+                              <span>
+                                <strong>Deadline:</strong> {formatDate(job.application_deadline)}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-slate-600">
+                                <MapPinIcon />
+                              </span>
+                              <span>
+                                <strong>Location:</strong> Kohalpur, Banke
                               </span>
                             </div>
                           </div>
-
-                          <span className="inline-flex border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold uppercase tracking-[0.14em] text-slate-600">
-                            {job.employmentType}
-                          </span>
                         </div>
 
-                        <div className="mt-5 grid gap-4 text-sm text-slate-600 md:grid-cols-2 xl:grid-cols-4">
-                          <div className="flex items-center gap-2">
-                            <span className="text-secondary-color">
-                              <CalendarIcon />
-                            </span>
-                            <span>
-                              <strong>Posted:</strong> {formatDate(job.postedDate)}
-                            </span>
+                        <div className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">
+                          <div>
+                            <h4 className="text-lg font-bold text-slate-900">
+                              Position Description
+                            </h4>
+                            <p className="mt-3 text-base leading-8 text-slate-700">
+                              {job.description}
+                            </p>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-primary-color">
-                              <ClockIcon />
-                            </span>
-                            <span>
-                              <strong>Deadline:</strong>{" "}
-                              {formatDate(job.applicationDeadline)}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-emerald-600">
-                              <UsersIcon />
-                            </span>
-                            <span>
-                              <strong>Department:</strong> {job.department}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-slate-600">
-                              <MapPinIcon />
-                            </span>
-                            <span>
-                              <strong>Location:</strong> {job.location}
-                            </span>
+
+                          <div className="border border-slate-200 bg-slate-50 p-5">
+                            <h4 className="text-lg font-bold text-slate-900">
+                              Application Status
+                            </h4>
+                            <div className="mt-4 space-y-3 text-sm">
+                              <div className="flex items-center gap-2">
+                                <span className={`h-2 w-2 rounded-full ${
+                                  job.status === 'open' ? 'bg-emerald-500' : 'bg-red-500'
+                                }`}></span>
+                                <span className="font-medium">
+                                  Status: {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
+                                </span>
+                              </div>
+                              <div className="text-slate-600">
+                                <p>Posted: {formatDate(job.posted_date)}</p>
+                                <p>Deadline: {formatDate(job.application_deadline)}</p>
+                                <p className="mt-2 text-xs">
+                                  {isExpired 
+                                    ? "Application period has ended" 
+                                    : "Applications are currently being accepted"
+                                  }
+                                </p>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
-
-                      <div className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr]">
-                        <div>
-                          <h4 className="text-lg font-bold text-slate-900">
-                            Position Description
-                          </h4>
-                          <p className="mt-3 text-base leading-8 text-slate-700">
-                            {job.description}
-                          </p>
-                        </div>
-
-                        <div className="border border-slate-200 bg-slate-50 p-5">
-                          <h4 className="text-lg font-bold text-slate-900">
-                            Key Requirements
-                          </h4>
-                          <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-600">
-                            {job.requirements.map((requirement) => (
-                              <li key={requirement} className="flex gap-3">
-                                <span className="mt-2 h-2.5 w-2.5 flex-shrink-0 bg-secondary-color" />
-                                <span>{requirement}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                ))}
+                    </article>
+                  );
+                })}
               </div>
 
               <div className="mt-10 border border-blue-200 bg-blue-50 p-6">
@@ -373,51 +362,7 @@ const Vacancy = () => {
             </div>
           )}
 
-          <div className="mt-12 border border-slate-200 bg-white p-8 shadow-lg shadow-slate-200/60">
-            <h3 className="text-center text-2xl font-black text-slate-900">
-              Why Join Our Team?
-            </h3>
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              <div className="text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center bg-secondary-color/10 text-secondary-color">
-                  <UsersIcon />
-                </div>
-                <h4 className="mt-4 font-bold text-slate-900">
-                  Collaborative Environment
-                </h4>
-                <p className="mt-2 text-sm leading-7 text-slate-600">
-                  Work with dedicated educators and staff in a supportive school
-                  community.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center bg-emerald-100 text-emerald-600">
-                  <BuildingIcon />
-                </div>
-                <h4 className="mt-4 font-bold text-slate-900">
-                  Modern Learning Environment
-                </h4>
-                <p className="mt-2 text-sm leading-7 text-slate-600">
-                  Be part of a school setting that values structured learning,
-                  growth, and student participation.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center bg-primary-color/15 text-primary-color">
-                  <BriefcaseIcon />
-                </div>
-                <h4 className="mt-4 font-bold text-slate-900">
-                  Professional Growth
-                </h4>
-                <p className="mt-2 text-sm leading-7 text-slate-600">
-                  Grow your experience through meaningful responsibilities and a
-                  strong educational culture.
-                </p>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </section>
     </div>

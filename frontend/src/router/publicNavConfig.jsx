@@ -2,6 +2,7 @@ export const academicsDropdownItems = [
   { path: "/academics/events", label: "Events" },
   { path: "/academics/achievements", label: "Achievements" },
   { path: "/academics/question-banks", label: "Question Banks" },
+  { path: "/academics/exams", label: "Exams" },
 ];
 
 export const publicNavItems = [

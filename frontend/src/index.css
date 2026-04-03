@@ -6,12 +6,13 @@
   --color-primary-color: #cb844a;
   --color-secondary-color: #006fd6;
   --color-background-color: #a9fff2;
+  --color-dashboard-gradient: linear-gradient(125deg, #0f172a, #112d65 45%, #06223a);
 }
 
 @layer base {
   :root {
-    color: #0f172a;
-    background-color: #f8fafc;
+    color: #f8f9ff;
+    background-color: #06132a;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -30,12 +31,14 @@
     margin: 0;
     min-height: 100vh;
     background:
-      radial-gradient(circle at top, rgba(169, 255, 242, 0.3), transparent 30%),
-      #f8fafc;
+      radial-gradient(circle at 20% 20%, rgba(203, 132, 74, 0.25), transparent 35%),
+      radial-gradient(circle at 80% 10%, rgba(0, 111, 214, 0.15), transparent 45%),
+      var(--color-dashboard-gradient);
   }
 
   #root {
     min-height: 100vh;
+    background: rgba(255, 255, 255, 0.02);
   }
 
   a {

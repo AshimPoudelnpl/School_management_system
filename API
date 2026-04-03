@@ -1,0 +1,81 @@
+1. Auth Controller
+POST /api/auth/login - Admin login
+POST /api/auth/signout - Admin logout (Protected)
+GET /api/auth/profile - Get admin profile (Protected)
+PUT /api/auth/change-password - Change password (Protected)
+GET /api/auth/dashboard-stats - Get dashboard statistics (Protected)
+
+2. Category Controller
+POST /api/category/gallery - Create gallery category (Protected)
+GET /api/category/gallery - Get gallery categories
+DELETE /api/category/gallery/:id - Delete gallery category (Protected)
+POST /api/category/notice - Create notice category (Protected)
+GET /api/category/notice - Get notice categories
+DELETE /api/category/notice/:id - Delete notice category (Protected)
+POST /api/category/blog - Create blog category (Protected)
+GET /api/category/blog - Get blog categories
+DELETE /api/category/blog/:id - Delete blog category (Protected)
+POST /api/category/vacancy - Create vacancy category (Protected)
+GET /api/category/vacancy - Get vacancy categories
+DELETE /api/category/vacancy/:id - Delete vacancy category (Protected)
+POST /api/category/team - Create team category (Protected)
+GET /api/category/team - Get team categories
+DELETE /api/category/team/:id - Delete team category (Protected)
+POST /api/category/class - Create class category (Protected)
+GET /api/category/class - Get class categories
+DELETE /api/category/class/:id - Delete class category (Protected)
+POST /api/category/exam - Create exam category (Protected)
+GET /api/category/exam - Get exam categories
+DELETE /api/category/exam/:id - Delete exam category (Protected)
+
+3. Content Controller
+POST /api/content/gallery - Create gallery (Protected)
+GET /api/content/gallery - Get galleries
+PUT /api/content/gallery/:id - Update gallery (Protected)
+DELETE /api/content/gallery/:id - Delete gallery (Protected)
+POST /api/content/notice - Create notice (Protected)
+GET /api/content/notice - Get notices
+PUT /api/content/notice/:id - Update notice (Protected)
+DELETE /api/content/notice/:id - Delete notice (Protected)
+POST /api/content/blog - Create blog (Protected)
+GET /api/content/blog - Get blogs
+PUT /api/content/blog/:id - Update blog (Protected)
+DELETE /api/content/blog/:id - Delete blog (Protected)
+POST /api/content/vacancy - Create vacancy (Protected)
+GET /api/content/vacancy - Get vacancies
+PUT /api/content/vacancy/:id - Update vacancy (Protected)
+DELETE /api/content/vacancy/:id - Delete vacancy (Protected)
+
+4. Academic Controller
+POST /api/academic/event - Create event (Protected)
+GET /api/academic/event - Get events
+PUT /api/academic/event/:id - Update event (Protected)
+DELETE /api/academic/event/:id - Delete event (Protected)
+POST /api/academic/achievement - Create achievement (Protected)
+GET /api/academic/achievement - Get achievements
+PUT /api/academic/achievement/:id - Update achievement (Protected)
+DELETE /api/academic/achievement/:id - Delete achievement (Protected)
+POST /api/academic/question-bank - Create question bank (Protected)
+GET /api/academic/question-bank - Get question banks
+PUT /api/academic/question-bank/:id - Update question bank (Protected)
+DELETE /api/academic/question-bank/:id - Delete question bank (Protected)
+
+5. Site Controller
+POST /api/site/home-slider - Create home slider (Protected)
+GET /api/site/home-slider - Get home sliders
+DELETE /api/site/home-slider/:id - Delete home slider (Protected)
+POST /api/site/reviews - Create review
+GET /api/site/reviews - Get reviews
+PATCH /api/site/reviews/:id - Update review (Protected)
+DELETE /api/site/reviews/:id - Delete review (Protected)
+POST /api/site/faqs - Create FAQ (Protected)
+GET /api/site/faqs - Get FAQs
+PUT /api/site/faqs/:id - Update FAQ (Protected)
+DELETE /api/site/faqs/:id - Delete FAQ (Protected)
+
+6. Team Controller
+POST /api/team/ - Create team member (Protected)
+GET /api/team/ - Get team members
+PUT /api/team/:id - Update team member (Protected)
+DELETE /api/team/:id - Delete team member (Protected)
+Note: (Protected) routes require authentication toke
