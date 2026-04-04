@@ -1,5 +1,6 @@
 import React from "react";
-import campusVideo from "../assets/Rai School FINAL- 45mb for Website.mp4";
+
+const CAMPUS_VIDEO_PATH = "/videos/campus-tour.mp4";
 
 const HeroSection = () => {
   return (
@@ -14,7 +15,7 @@ const HeroSection = () => {
           preload="metadata"
           aria-hidden="true"
         >
-          <source src={campusVideo} type="video/mp4" />
+          <source src={CAMPUS_VIDEO_PATH} type="video/mp4" />
         </video>
       </div>
     </section>
