@@ -3,6 +3,7 @@ import {
   useGetNoticeQuery,
   useGetNoticeCategoriesQuery,
 } from "../../redux/features/contentSlice";
+import Skeleton from "../../shared/Skeleton";
 
 const CaretRightIcon = () => (
   <svg
@@ -62,8 +63,8 @@ const NoticeList = () => {
   if (noticeLoading || categoriesLoading) {
     return (
       <section className="px-4 py-10 sm:px-6 lg:px-10 lg:py-14">
-        <div className="flex justify-center items-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="mx-auto max-w-6xl">
+          <Skeleton variant="table" count={6} />
         </div>
       </section>
     );

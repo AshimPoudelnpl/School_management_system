@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetBlogQuery, useGetBlogCategoriesQuery } from "../../redux/features/contentSlice";
+import Skeleton from "../../shared/Skeleton";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -46,8 +47,8 @@ const BlogGrid = () => {
   if (blogLoading || categoriesLoading) {
     return (
       <section className="bg-white px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
-        <div className="flex justify-center items-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="mx-auto max-w-6xl">
+          <Skeleton variant="grid" count={6} className="mt-12" />
         </div>
       </section>
     );

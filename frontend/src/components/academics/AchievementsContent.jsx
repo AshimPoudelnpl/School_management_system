@@ -1,5 +1,6 @@
 import React from "react";
 import { useGetAchivementQuery } from "../../redux/features/academicSlice";
+import Skeleton from "../../shared/Skeleton";
 
 const AchievementsContent = () => {
   const { data: achievementsData, isLoading, error } = useGetAchivementQuery();
@@ -9,9 +10,7 @@ const AchievementsContent = () => {
     return (
       <section className="px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-6xl">
-          <div className="flex items-center justify-center py-20">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary-color border-t-transparent"></div>
-          </div>
+          <Skeleton variant="grid" count={6} />
         </div>
       </section>
     );

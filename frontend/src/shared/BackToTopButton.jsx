@@ -42,10 +42,8 @@ const BackToTopButton = () => {
       type="button"
       onClick={scrollToTop}
       aria-label="Back to top"
-      className={`fixed bottom-5 right-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full bg-secondary-color text-white shadow-lg shadow-sky-300/50 transition-all duration-300 hover:-translate-y-1 hover:bg-primary-color sm:bottom-6 sm:right-6 ${
-        isVisible
-          ? "pointer-events-auto translate-y-0 opacity-100"
-          : "pointer-events-none translate-y-4 opacity-0"
+      className={`fixed bottom-5 right-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full bg-secondary-color text-white shadow-lg  transition-all duration-300 hover:-translate-y-1 hover:bg-primary-color sm:bottom-6 sm:right-6 ${
+        isVisible ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-4 "
       }`}
     >
       <ArrowUpIcon />

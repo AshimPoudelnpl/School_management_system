@@ -273,16 +273,7 @@ const Navbar = () => {
             )}
           </nav>
 
-          {/* Login button */}
-          <div className="hidden lg:flex items-center py-2 shrink-0">
-            <Link
-              to="/login"
-              onClick={closeMenu}
-              className="rounded bg-[#c0392b] px-5 py-2 text-[13.5px] font-bold text-white tracking-wide hover:bg-[#a93226] transition"
-            >
-              Login
-            </Link>
-          </div>
+          
 
           {/* Mobile hamburger */}
           <button

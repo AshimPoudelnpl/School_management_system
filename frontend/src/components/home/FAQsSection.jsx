@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useGetFaqsQuery } from "../../redux/features/siteSlice";
+import Skeleton from "../../shared/Skeleton";
 
 const FAQsSection = () => {
   const { data: faqsData, isLoading, error } = useGetFaqsQuery();
@@ -14,9 +15,7 @@ const FAQsSection = () => {
     return (
       <section className="bg-white px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-screen-xl">
-          <div className="flex items-center justify-center py-12">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary-color border-t-transparent"></div>
-          </div>
+          <Skeleton variant="text" count={8} className="mx-auto max-w-4xl" />
         </div>
       </section>
     );

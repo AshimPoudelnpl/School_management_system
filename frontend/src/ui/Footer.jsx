@@ -8,7 +8,8 @@ const currentYear = new Date().getFullYear();
 
 const Footer = () => {
   return (
-    <footer className="bg-[linear-gradient(135deg,var(--color-secondary-color),var(--color-primary-color))] px-4 pb-6 pt-12 text-white sm:px-6">
+    <footer className="bg-[linear-gradient(135deg,rgba(0,0,0,0.6),rgba(0,0,0,0.3))] px-4 pb-6 pt-12 text-white sm:px-6">
+      {" "}
       <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <div className="space-y-6">
           <img
@@ -120,16 +121,22 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
       <hr className="my-6 border-white/15" />
-
       <div className="mx-auto flex max-w-screen-xl flex-col gap-2 text-start sm:flex-row sm:items-center sm:justify-between">
         <p className="text-[13px] text-white/75">
           Copyright (c) {currentYear} Western Secondary School. All Rights
           Reserved.
         </p>
         <p className="text-[13px] text-white/75">
-          Powered by <span className="text-background-color">Next Infosys Pvt. Ltd.</span>
+          Powered by{" "}
+          <a
+            href="https://nextinfosys.com.np/"
+            className="text-yellow-600"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Next Infosys Pvt. Ltd.
+          </a>
         </p>
       </div>
     </footer>

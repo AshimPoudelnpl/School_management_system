@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import { useGetCategoryExamQuery } from "../redux/features/categorySlice";
+import Skeleton from "../shared/Skeleton";
 
 const formatExamDate = (value) => {
   if (!value) return "Date not shared yet";
@@ -33,7 +34,7 @@ const AcademicsExams = () => {
 
       <div className="mx-auto mt-10 max-w-5xl">
         {isLoading ? (
-          <p className="text-center text-sm text-slate-500">Loading exams…</p>
+          <Skeleton variant="card" count={3} />
         ) : isError ? (
           <p className="text-center text-sm text-red-500">Failed to load exams.</p>
         ) : (
@@ -52,9 +53,11 @@ const AcademicsExams = () => {
                   </span>
                 </div>
                 <p className="mt-2 text-sm font-semibold text-slate-500">
-                  Year {exam.exam_year ?? "—"}
+                  Year {exam.exam_year ?? "-"}
                 </p>
-                <p className="mt-4 text-sm leading-7 text-slate-600">{exam.description ?? exam.message ?? "Terminal assessment schedule."}</p>
+                <p className="mt-4 text-sm leading-7 text-slate-600">
+                  {exam.description ?? exam.message ?? "Terminal assessment schedule."}
+                </p>
                 <div className="mt-6 flex items-center justify-between text-sm text-slate-500">
                   <span>Scheduled on</span>
                   <span className="font-semibold text-slate-900">{formatExamDate(exam.exam_date)}</span>

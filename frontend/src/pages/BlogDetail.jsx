@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useGetBlogQuery, useGetBlogCategoriesQuery } from "../redux/features/contentSlice";
+import Skeleton from "../shared/Skeleton";
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -17,8 +18,9 @@ const BlogDetail = () => {
   if (blogLoading || categoriesLoading) {
     return (
       <div className="min-h-screen bg-gray-50 py-8 px-4">
-        <div className="flex justify-center items-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="max-w-4xl mx-auto">
+          <Skeleton variant="image" count={1} />
+          <Skeleton variant="text" count={8} className="mt-8" />
         </div>
       </div>
     );

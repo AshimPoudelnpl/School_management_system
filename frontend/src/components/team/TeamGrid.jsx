@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { useGetTeamQuery, useGetTeamCategoriesQuery } from "../../redux/features/teamSlice";
+import Skeleton from "../../shared/Skeleton";
 
 const PlaceholderIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="mx-auto h-14 w-14 text-secondary-color" aria-hidden="true">
@@ -32,7 +33,7 @@ const TeamGrid = () => {
   // Create category options with "All" option
   const teamCategories = useMemo(() => {
     const categoryOptions = [{ id: "all", category_name: "All Team" }];
-    return [...categoryOptions, ...categories];
+    return [...[...categories].reverse(), ...categoryOptions];
   }, [categories]);
 
   // Filter team members by category and prioritize is_main members
@@ -55,8 +56,8 @@ const TeamGrid = () => {
   if (teamLoading || categoriesLoading) {
     return (
       <section className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-        <div className="flex justify-center items-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="mx-auto max-w-7xl">
+          <Skeleton variant="grid" count={8} className="mt-10" />
         </div>
       </section>
     );
