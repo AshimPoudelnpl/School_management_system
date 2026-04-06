@@ -17,8 +17,8 @@ const ChairmanMessageSection = () => {
   return (
     <section className="bg-gradient-to-br from-sky-50 via-white to-indigo-50 px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
       <div className="mx-auto max-w-screen-xl">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(320px,0.92fr)_minmax(0,1.08fr)] lg:gap-14">
-          <div className="relative">
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(320px,0.92fr)_minmax(0,1.08fr)] lg:gap-14">
+          <div className="relative mx-auto w-full max-w-[500px] lg:self-end">
             <div className="absolute -left-6 -top-6 h-44 w-44 rounded-full bg-sky-200/70 blur-3xl"></div>
             <div className="absolute -bottom-10 right-2 h-40 w-40 rounded-full bg-indigo-200/70 blur-3xl"></div>
 
@@ -26,7 +26,7 @@ const ChairmanMessageSection = () => {
               <img
                 src={principalImage}
                 alt="Western School principal"
-                className="h-full min-h-[420px] w-full object-cover"
+                className="h-[360px] w-full object-cover object-center sm:h-[400px] lg:h-[450px]"
               />
 
               <div className="absolute bottom-6 right-6 border border-slate-200 bg-white/95 px-5 py-4 shadow-lg shadow-slate-200/60 backdrop-blur">
@@ -49,11 +49,11 @@ const ChairmanMessageSection = () => {
 
           <div className="max-w-2xl">
             <span className="inline-flex border border-secondary-color/20 bg-secondary-color/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-secondary-color">
-              Message From Leadership
+              Message From Principal
             </span>
 
             <h2 className="mt-5 text-3xl font-black leading-tight text-slate-900 sm:text-4xl">
-              Chairman&apos;s Message
+              Principal&apos;s Message
             </h2>
 
             <div className="mt-6 space-y-4 text-sm leading-7 text-slate-600 sm:text-base">
