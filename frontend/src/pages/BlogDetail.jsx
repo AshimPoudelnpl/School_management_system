@@ -94,9 +94,10 @@ const BlogDetail = () => {
             </div>
 
             <div className="prose prose-lg max-w-none">
-              <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                {blog.description}
-              </div>
+              <div
+                className="text-gray-700 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: blog.description }}
+              />
             </div>
           </div>
         </article>
@@ -133,9 +134,10 @@ const BlogDetail = () => {
                       <h4 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
                         {relatedBlog.title}
                       </h4>
-                      <p className="text-sm text-gray-600 line-clamp-3">
-                        {relatedBlog.description}
-                      </p>
+                      <div
+                        className="text-sm text-gray-600 line-clamp-3"
+                        dangerouslySetInnerHTML={{ __html: relatedBlog.description }}
+                      />
                     </div>
                   </Link>
                 );

@@ -113,9 +113,10 @@ const BlogGrid = () => {
                     <h3 className="mt-5 text-2xl font-bold leading-snug text-slate-900 line-clamp-2">
                       {blog.title}
                     </h3>
-                    <p className="mt-4 text-sm leading-7 text-slate-600 line-clamp-3">
-                      {blog.description}
-                    </p>
+                    <div
+                      className="mt-4 text-sm leading-7 text-slate-600 line-clamp-3"
+                      dangerouslySetInnerHTML={{ __html: blog.description }}
+                    />
                     <div className="mt-4 flex items-center justify-between text-xs text-slate-400">
                       <span>
                         {new Date(blog.published_date).toLocaleDateString("en-US", {

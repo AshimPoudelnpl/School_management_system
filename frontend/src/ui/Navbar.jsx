@@ -11,6 +11,9 @@ import {
 const navLinkBase =
   "whitespace-nowrap px-3 py-1.5 text-[13.5px] font-semibold tracking-wide text-white transition-colors hover:text-yellow-300 xl:px-4 xl:text-[14px]";
 
+const textNavLinkBase =
+  "inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500 transition hover:text-secondary-color";
+
 const mobileLinkClasses =
   "block rounded px-4 py-3 text-[15px] font-semibold text-white transition-colors hover:text-yellow-300";
 
@@ -125,7 +128,7 @@ const Navbar = () => {
   };
 
   return (
-    <>
+    <div ref={dropdownRef}>
       {/* ── TOP INFO BAR ── */}
       <div className="sticky top-0 z-50 bg-[#1a3a6e] text-slate-200 text-[12.5px]">
         <div className="mx-auto flex max-w-screen-2xl flex-col gap-2 px-2 py-1.5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-10">
@@ -396,7 +399,7 @@ const Navbar = () => {
           </div>
         )}
       </header>
-    </>
+    </div>
   );
 };
 
