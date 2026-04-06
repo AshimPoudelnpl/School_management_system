@@ -3,7 +3,8 @@ import React from "react";
 export const SearchIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
     <path
-      d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"
+      d="m21 21-4.35-4.35M10.5 18a7.
+      5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"
       stroke="currentColor"
       strokeWidth="1.8"
       strokeLinecap="round"

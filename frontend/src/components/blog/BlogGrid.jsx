@@ -18,7 +18,7 @@ const BlogGrid = () => {
   // Create category filter options
   const blogCategories = useMemo(() => {
     const categoryNames = categories.map(cat => cat.category_name);
-    return ["All Categories", ...categoryNames];
+    return [...categoryNames, "All Categories"];
   }, [categories]);
 
   // Filter blogs by category
