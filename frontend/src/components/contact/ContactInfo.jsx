@@ -21,7 +21,7 @@ const MailIcon = () => (
 );
 
 const ContactInfo = () => (
-  <div className="relative overflow-hidden bg-slate-100 p-8 lg:w-1/2 lg:p-12">
+  <div data-gsap="reveal" className="relative overflow-hidden bg-slate-100 p-8 lg:w-1/2 lg:p-12">
     <div className="absolute inset-0 opacity-10">
       <img src={schoolBuilding} alt="Western School building" className="h-full w-full object-cover" />
     </div>

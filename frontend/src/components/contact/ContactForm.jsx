@@ -25,7 +25,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-white p-8 lg:w-1/2 lg:p-12">
+    <div data-gsap="reveal" className="flex items-center justify-center bg-white p-8 lg:w-1/2 lg:p-12">
       <form onSubmit={handleSubmit} className="w-full max-w-lg space-y-6 border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/70">
         {[
           { label: "Name *", name: "name", type: "text" },

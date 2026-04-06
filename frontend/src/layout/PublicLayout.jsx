@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from '../ui/Navbar'
 import Footer from '../ui/Footer'
 import BackToTopButton from '../shared/BackToTopButton'
+import usePageGsap from '../hooks/usePageGsap'
 
 const PublicLayout = () => {
   const location = useLocation()
+  const pageRef = useRef(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
@@ -15,11 +17,15 @@ const PublicLayout = () => {
     })
   }, [location.pathname])
 
+  usePageGsap(pageRef, location.pathname)
+
   return (
     <div className="min-h-screen">
       <Navbar />
       <main>
-        <Outlet />
+        <div ref={pageRef}>
+          <Outlet />
+        </div>
       </main>
       <Footer />
       <BackToTopButton />
