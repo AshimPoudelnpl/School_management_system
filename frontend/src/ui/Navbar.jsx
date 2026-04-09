@@ -36,8 +36,11 @@ function NepaliDate() {
   const m = now.getMinutes().toString().padStart(2, "0");
   const s = now.getSeconds().toString().padStart(2, "0");
   return (
-    <span className="font-mono text-[11px] tracking-wide">
-      {days[now.getDay()]}, {months[now.getMonth()]} {now.getDate()} {now.getFullYear()} &nbsp;|&nbsp; {h12}:{m}:{s} {ampm}
+    <span className="font-mono text-[10px] tracking-wide sm:text-[11px]">
+      <span className="sm:hidden">{h12}:{m} {ampm}</span>
+      <span className="hidden sm:inline">
+        {days[now.getDay()]}, {months[now.getMonth()]} {now.getDate()} {now.getFullYear()} &nbsp;|&nbsp; {h12}:{m}:{s} {ampm}
+      </span>
     </span>
   );
 }
@@ -106,7 +109,7 @@ const Navbar = () => {
       <div
         className="bg-gradient-to-r from-[#0d2a5a] via-[#1a3a6e] to-[#0d2a5a] text-slate-300 text-[11.5px] border-b border-white/10"
       >
-        <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-10 py-1.5 gap-2">
+        <div className="mx-auto flex max-w-screen-2xl items-center justify-between gap-2 px-4 py-1.5 sm:px-6 lg:px-10">
           {/* Left: contact info */}
           <div className="hidden sm:flex items-center gap-4">
             <span className="flex items-center gap-1.5">
@@ -125,7 +128,7 @@ const Navbar = () => {
           </div>
 
           {/* Right: clock + social */}
-          <div className="flex flex-1 sm:flex-none items-center justify-between sm:justify-end gap-3">
+          <div className="flex flex-1 items-center justify-end gap-3 sm:flex-none sm:justify-end">
             <NepaliDate />
             <span className="text-white/20 hidden sm:inline">|</span>
             {socialLinks.map(({ label, href, icon }) => (
@@ -152,39 +155,30 @@ const Navbar = () => {
             : "max-h-40 translate-y-0 border-b border-slate-100 opacity-100"
         }`}
       >
-        <div className="mx-auto flex max-w-screen-2xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-10">
+        <div className="mx-auto flex max-w-screen-2xl items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6 lg:px-10">
           {/* Logo */}
           <Link to="/" onClick={closeMenu} className="shrink-0">
             <img
               src={logo}
               alt="Western School logo"
-              className="h-14 w-auto object-contain sm:h-16 transition-transform duration-200 hover:scale-105"
+              className="h-12 w-auto object-contain transition-transform duration-200 hover:scale-105 sm:h-16"
             />
           </Link>
 
           {/* School name */}
-          <div className="flex-1 text-center">
+          <div className="min-w-0 flex-1 text-left sm:text-center">
             <p
-              className="font-extrabold tracking-wide uppercase text-[#c0392b] leading-tight"
+              className="font-extrabold uppercase leading-tight text-[#c0392b]"
               style={{ fontSize: "clamp(0.85rem, 2vw, 1.4rem)" }}
             >
               Western English Medium Secondary School
             </p>
+            <p className="mt-1 text-[11px] text-slate-500 sm:hidden">
+              Kohalpur-05, Banke
+            </p>
             <p className="text-slate-500 text-xs sm:text-sm mt-0.5 hidden sm:block">
               Kohalpur-05, Banke &nbsp;|&nbsp; westernschool@gmail.com
             </p>
-            <a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Chat on WhatsApp"
-              className="mt-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200 transition-colors hover:bg-emerald-100 sm:hidden"
-            >
-              <svg className="h-4 w-4 fill-current" viewBox="0 0 32 32" aria-hidden="true">
-                <path d="M19.11 17.33c-.28-.14-1.64-.81-1.89-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.85 1.08-.16.18-.31.21-.59.07-.28-.14-1.17-.43-2.23-1.36-.82-.73-1.38-1.63-1.54-1.91-.16-.28-.02-.43.12-.57.13-.13.28-.34.42-.5.14-.16.18-.28.28-.47.09-.18.05-.35-.02-.5-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.47.07-.71.35-.25.28-.95.93-.95 2.27s.97 2.63 1.11 2.82c.14.18 1.9 2.9 4.6 4.06.64.28 1.14.45 1.53.58.64.2 1.22.17 1.68.1.51-.08 1.64-.67 1.87-1.32.23-.65.23-1.21.16-1.33-.07-.12-.25-.18-.52-.32Z" />
-                <path d="M16.02 3.2c-7.08 0-12.82 5.74-12.82 12.81 0 2.27.59 4.48 1.72 6.42L3 29l6.75-1.77a12.78 12.78 0 0 0 6.27 1.61h.01c7.07 0 12.81-5.74 12.81-12.82A12.8 12.8 0 0 0 16.02 3.2Zm0 23.48h-.01a10.64 10.64 0 0 1-5.43-1.49l-.39-.23-4 .05 1.07-3.86-.25-.4a10.62 10.62 0 1 1 9 5.93Z" />
-              </svg>
-            </a>
           </div>
 
           <a
@@ -192,7 +186,7 @@ const Navbar = () => {
             target="_blank"
             rel="noreferrer"
             aria-label="Chat on WhatsApp"
-            className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-600 hover:shadow-emerald-500/35 sm:inline-flex"
+            className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-600 hover:shadow-emerald-500/35 md:inline-flex"
           >
             <svg className="h-5 w-5 fill-current" viewBox="0 0 32 32" aria-hidden="true">
               <path d="M19.11 17.33c-.28-.14-1.64-.81-1.89-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.85 1.08-.16.18-.31.21-.59.07-.28-.14-1.17-.43-2.23-1.36-.82-.73-1.38-1.63-1.54-1.91-.16-.28-.02-.43.12-.57.13-.13.28-.34.42-.5.14-.16.18-.28.28-.47.09-.18.05-.35-.02-.5-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.47.07-.71.35-.25.28-.95.93-.95 2.27s.97 2.63 1.11 2.82c.14.18 1.9 2.9 4.6 4.06.64.28 1.14.45 1.53.58.64.2 1.22.17 1.68.1.51-.08 1.64-.67 1.87-1.32.23-.65.23-1.21.16-1.33-.07-.12-.25-.18-.52-.32Z" />
@@ -210,7 +204,19 @@ const Navbar = () => {
         }`}
         ref={dropdownRef}
       >
-        <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-10">
+        <div className="mx-auto flex max-w-screen-2xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-10">
+          <Link to="/" onClick={closeMenu} className="flex min-w-0 flex-1 items-center gap-3 py-2 lg:hidden">
+            <img src={logo} alt="Western School logo" className="h-10 w-auto object-contain" />
+            <div className="min-w-0">
+              <p className="truncate text-sm font-bold uppercase tracking-[0.12em] text-white">
+                Western School
+              </p>
+              <p className="truncate text-[10px] font-medium uppercase tracking-[0.16em] text-white/75">
+                English Medium Secondary
+              </p>
+            </div>
+          </Link>
+
           {/* Desktop nav */}
           <nav className="hidden lg:flex flex-1 items-center justify-center gap-1">
             {publicNavItems.map(({ path, label, children }) =>
@@ -287,7 +293,7 @@ const Navbar = () => {
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((o) => !o)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/25 text-white transition-all hover:border-amber-300 hover:text-amber-300 hover:bg-white/10 lg:hidden my-2"
+            className="my-2 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/25 text-white transition-all hover:border-amber-300 hover:bg-white/10 hover:text-amber-300 lg:hidden"
           >
             {isMenuOpen ? (
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
@@ -305,7 +311,7 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="border-t border-white/15 glass lg:hidden">
             <div
-              className="mx-auto max-h-[calc(100vh-10rem)] max-w-screen-2xl overflow-y-auto px-4 py-3 sm:px-6"
+              className="mx-auto max-h-[calc(100vh-5rem)] max-w-screen-2xl overflow-y-auto px-4 py-3 sm:px-6"
               style={{ background: "rgba(13,42,90,0.97)" }}
             >
               <nav className="flex flex-col gap-1">

@@ -84,18 +84,18 @@ const GalleryGrid = () => {
       <section className="bg-gradient-to-br from-slate-50 via-white to-sky-50 px-4 py-12 sm:px-6 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-screen-xl">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary-color">Browse Albums</p>
-            <h2 className="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">A visual collection from Western School.</h2>
-            <p className="mt-5 text-sm leading-7 text-slate-600 sm:text-base">Filter albums by category, open each collection, and view school moments in a simple full-screen preview.</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary-color sm:text-sm sm:tracking-[0.28em]">Browse Albums</p>
+            <h2 className="mt-4 text-2xl font-black leading-tight text-slate-900 sm:text-4xl">A visual collection from Western School.</h2>
+            <p className="mt-4 text-sm leading-7 text-slate-600 sm:mt-5 sm:text-base">Filter albums by category, open each collection, and view school moments in a simple full-screen preview.</p>
           </div>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <div className="-mx-4 mt-8 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:mt-10 sm:flex-wrap sm:justify-center sm:gap-3 sm:overflow-visible sm:px-0 sm:pb-0">
             {galleryCategories.map((category) => (
               <button 
                 key={category} 
                 type="button" 
                 onClick={() => handleCategoryChange(category)}
-                className={`px-5 py-3 text-sm font-semibold transition sm:px-6 ${
+                className={`shrink-0 whitespace-nowrap rounded-full px-4 py-2.5 text-xs font-semibold transition sm:px-6 sm:py-3 sm:text-sm ${
                   selectedCategory === category 
                     ? "bg-[linear-gradient(135deg,var(--color-secondary-color),var(--color-primary-color))] text-white shadow-lg shadow-sky-200/60" 
                     : "border border-slate-200 bg-white text-slate-600 shadow-sm hover:border-secondary-color hover:text-secondary-color"
@@ -114,7 +114,7 @@ const GalleryGrid = () => {
           </div>
 
           {paginatedGalleries.length > 0 ? (
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
               {paginatedGalleries.map((gallery, index) => {
                 const firstImage = gallery.image_url.split(',')[0];
                 const imageCount = gallery.image_url.split(',').length;
@@ -123,7 +123,7 @@ const GalleryGrid = () => {
                 return (
                   <article 
                     key={gallery.id} 
-                    className="overflow-hidden border border-slate-200 bg-white shadow-lg shadow-slate-200/60 transition duration-300 hover:-translate-y-1 hover:shadow-xl" 
+                    className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-lg shadow-slate-200/60 transition duration-300 hover:-translate-y-1 hover:shadow-xl" 
                     style={{ transitionDelay: `${index * 40}ms` }}
                   >
                     <button type="button" onClick={() => openModal(gallery)} className="block w-full text-left">
@@ -131,27 +131,27 @@ const GalleryGrid = () => {
                         <img 
                           src={`${import.meta.env.VITE_IMG_URL}${firstImage}`} 
                           alt={gallery.caption} 
-                          className="h-64 w-full object-cover transition duration-500 hover:scale-105" 
+                          className="h-56 w-full object-cover transition duration-500 hover:scale-105 sm:h-64" 
                         />
-                        <div className="absolute left-4 top-4 bg-white/95 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-secondary-color shadow">
+                        <div className="absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-secondary-color shadow sm:left-4 sm:top-4 sm:px-3 sm:py-2 sm:text-[11px] sm:tracking-[0.2em]">
                           {categoryName}
                         </div>
-                        <div className="absolute bottom-4 right-4 bg-slate-900/80 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
+                        <div className="absolute bottom-3 right-3 rounded-full bg-slate-900/80 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white sm:bottom-4 sm:right-4 sm:px-3 sm:py-2 sm:text-[11px] sm:tracking-[0.18em]">
                           {imageCount} Photo{imageCount !== 1 ? 's' : ''}
                         </div>
                       </div>
-                      <div className="p-6">
-                        <h3 className="text-xl font-bold leading-snug text-slate-900 line-clamp-2">
+                      <div className="p-5 sm:p-6">
+                        <h3 className="line-clamp-2 text-lg font-bold leading-snug text-slate-900 sm:text-xl">
                           {gallery.caption}
                         </h3>
-                        <p className="mt-4 text-sm text-slate-400">
+                        <p className="mt-3 text-xs text-slate-400 sm:mt-4 sm:text-sm">
                           {new Date(gallery.created_at).toLocaleDateString("en-US", {
                             year: "numeric",
                             month: "long",
                             day: "numeric",
                           })}
                         </p>
-                        <span className="mt-6 inline-flex text-sm font-semibold uppercase tracking-[0.16em] text-primary-color">View Album</span>
+                        <span className="mt-5 inline-flex text-xs font-semibold uppercase tracking-[0.14em] text-primary-color sm:mt-6 sm:text-sm sm:tracking-[0.16em]">View Album</span>
                       </div>
                     </button>
                   </article>
@@ -159,13 +159,13 @@ const GalleryGrid = () => {
               })}
             </div>
           ) : (
-            <div className="mt-10 border border-slate-200 bg-white px-6 py-16 text-center shadow-lg shadow-slate-200/60">
-              <h3 className="text-2xl font-bold text-slate-900">No albums found</h3>
+            <div className="mt-10 rounded-[1.5rem] border border-slate-200 bg-white px-5 py-12 text-center shadow-lg shadow-slate-200/60 sm:px-6 sm:py-16">
+              <h3 className="text-xl font-bold text-slate-900 sm:text-2xl">No albums found</h3>
               <p className="mt-4 text-sm leading-7 text-slate-600">Try choosing a different category to explore more school moments.</p>
               <button 
                 type="button" 
                 onClick={() => handleCategoryChange("All Categories")} 
-                className="mt-6 bg-secondary-color px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-primary-color"
+                className="mt-6 rounded-full bg-secondary-color px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-primary-color"
               >
                 Show All
               </button>
@@ -173,12 +173,12 @@ const GalleryGrid = () => {
           )}
 
           {totalPages > 1 && (
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:mt-10 sm:gap-3">
               <button 
                 type="button" 
                 onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} 
                 disabled={currentPage === 1} 
-                className="border border-slate-200 bg-white px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-slate-700 transition hover:border-secondary-color hover:text-secondary-color disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 transition hover:border-secondary-color hover:text-secondary-color disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3 sm:text-sm sm:tracking-[0.16em]"
               >
                 Previous
               </button>
@@ -187,7 +187,7 @@ const GalleryGrid = () => {
                   key={page} 
                   type="button" 
                   onClick={() => setCurrentPage(page)} 
-                  className={`min-w-11 px-4 py-3 text-sm font-semibold transition ${
+                  className={`min-w-10 rounded-full px-3.5 py-2.5 text-xs font-semibold transition sm:min-w-11 sm:px-4 sm:py-3 sm:text-sm ${
                     currentPage === page 
                       ? "bg-secondary-color text-white shadow-lg shadow-sky-200/60" 
                       : "border border-slate-200 bg-white text-slate-700 hover:border-secondary-color hover:text-secondary-color"
@@ -200,7 +200,7 @@ const GalleryGrid = () => {
                 type="button" 
                 onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))} 
                 disabled={currentPage === totalPages} 
-                className="border border-slate-200 bg-white px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-slate-700 transition hover:border-secondary-color hover:text-secondary-color disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded-full border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700 transition hover:border-secondary-color hover:text-secondary-color disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 sm:py-3 sm:text-sm sm:tracking-[0.16em]"
               >
                 Next
               </button>
