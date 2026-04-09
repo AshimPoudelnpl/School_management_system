@@ -353,15 +353,6 @@ const Navbar = () => {
                 )}
               </nav>
 
-              <div className="mt-4 border-t border-white/15 pt-4">
-                <Link
-                  to="/login"
-                  onClick={closeMenu}
-                  className="block w-full text-center rounded-xl bg-gradient-to-r from-[#c0392b] to-[#e74c3c] px-5 py-3 text-sm font-bold text-white transition-all hover:shadow-lg hover:shadow-red-500/30 hover:scale-[1.02]"
-                >
-                  Login
-                </Link>
-              </div>
             </div>
           </div>
         )}
