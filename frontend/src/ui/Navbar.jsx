@@ -144,36 +144,58 @@ const Navbar = () => {
 
       {/* ── SCHOOL IDENTITY HEADER ── */}
       <div
-        className={`bg-white/95 backdrop-blur-md border-b transition-all duration-300 ${
-          scrolled ? "border-slate-200 shadow-md" : "border-slate-100"
+        className={`overflow-hidden bg-white/95 backdrop-blur-md transition-all duration-300 ${
+          scrolled
+            ? "max-h-0 -translate-y-2 border-b-0 opacity-0"
+            : "max-h-40 translate-y-0 border-b border-slate-100 opacity-100"
         }`}
       >
-        <div className="mx-auto flex max-w-screen-2xl items-center gap-4 px-4 sm:px-6 lg:px-10 py-3">
-          {/* Logo */}
-          <Link to="/" onClick={closeMenu} className="shrink-0">
-            <img
-              src={logo}
-              alt="Western School logo"
-              className="h-14 w-auto object-contain sm:h-16 transition-transform duration-200 hover:scale-105"
-            />
-          </Link>
+        <div className="mx-auto max-w-screen-2xl px-4 py-3 sm:px-6 lg:px-10">
+          <div className="flex items-center justify-between gap-3 rounded-[1.75rem] border border-slate-200/80 bg-white/90 px-4 py-3 shadow-[0_18px_40px_rgba(15,23,42,0.08)] sm:gap-4 sm:px-5">
+            <Link to="/" onClick={closeMenu} className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-white via-slate-50 to-sky-50 ring-1 ring-slate-200 shadow-sm sm:h-16 sm:w-16">
+                <img
+                  src={logo}
+                  alt="Western School logo"
+                  className="h-10 w-auto object-contain transition-transform duration-200 hover:scale-105 sm:h-12"
+                />
+              </div>
 
-          {/* School name */}
-          <div className="flex-1 text-center">
-            <p
-              className="font-extrabold tracking-wide uppercase text-[#c0392b] leading-tight"
-              style={{ fontSize: "clamp(0.85rem, 2vw, 1.4rem)" }}
-            >
-              Western English Medium Secondary School
-            </p>
-            <p className="text-slate-500 text-xs sm:text-sm mt-0.5 hidden sm:block">
-              Kohalpur-05, Banke &nbsp;|&nbsp; westernschool@gmail.com
-            </p>
-          </div>
+              <div className="min-w-0">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-sky-700/70 sm:text-[11px]">
+                  Western School
+                </p>
+                <p
+                  className="font-black leading-tight text-slate-800"
+                  style={{ fontSize: "clamp(0.95rem, 2vw, 1.45rem)" }}
+                >
+                  Western English Medium Secondary School
+                </p>
 
-          {/* Nepal flag */}
-          <div className="shrink-0 hidden sm:flex items-center">
-            <img src={flagGif} alt="Nepal flag" className="h-14 w-auto object-contain sm:h-16" />
+                <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[11px] text-slate-500 sm:text-xs">
+                  <span className="rounded-full bg-slate-100 px-2.5 py-1 font-medium text-slate-600">
+                    Kohalpur-05, Banke
+                  </span>
+                  <span className="hidden rounded-full bg-amber-50 px-2.5 py-1 font-medium text-amber-700 sm:inline-flex">
+                    westernschool@gmail.com
+                  </span>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-rose-50 px-2.5 py-1 font-medium text-rose-600 md:hidden">
+                    <img src={flagGif} alt="Nepal flag" className="h-3.5 w-auto object-contain" />
+                    Nepal
+                  </span>
+                </div>
+              </div>
+            </Link>
+
+            <div className="hidden shrink-0 md:flex items-center gap-3 rounded-2xl border border-sky-100 bg-gradient-to-r from-sky-50 via-white to-rose-50 px-3.5 py-2.5 shadow-sm">
+              <img src={flagGif} alt="Nepal flag" className="h-10 w-auto object-contain" />
+              <div className="text-right">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-400">
+                  Proudly Based In
+                </p>
+                <p className="text-sm font-semibold text-slate-700">Nepal</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
