@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
-import flagGif from "../assets/flg_gif/flag-CBVq6uIe.gif";
 import {
   academicsDropdownItems,
   publicNavItems,
@@ -19,6 +18,9 @@ const socialLinks = [
     ),
   },
 ];
+
+const SCHOOL_PHONE = "9848940309";
+const WHATSAPP_LINK = "https://wa.me/9779848940309?text=Hello%20Western%20School";
 
 // ── Live Clock ──────────────────────────────────────────────────────────────
 function NepaliDate() {
@@ -118,7 +120,7 @@ const Navbar = () => {
               <svg className="h-3 w-3 fill-current text-amber-400 shrink-0" viewBox="0 0 24 24">
                 <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.61 21 3 14.39 3 6.25c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z" />
               </svg>
-              9848940309
+              {SCHOOL_PHONE}
             </span>
           </div>
 
@@ -150,53 +152,54 @@ const Navbar = () => {
             : "max-h-40 translate-y-0 border-b border-slate-100 opacity-100"
         }`}
       >
-        <div className="mx-auto max-w-screen-2xl px-4 py-3 sm:px-6 lg:px-10">
-          <div className="flex items-center justify-between gap-3 rounded-[1.75rem] border border-slate-200/80 bg-white/90 px-4 py-3 shadow-[0_18px_40px_rgba(15,23,42,0.08)] sm:gap-4 sm:px-5">
-            <Link to="/" onClick={closeMenu} className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-white via-slate-50 to-sky-50 ring-1 ring-slate-200 shadow-sm sm:h-16 sm:w-16">
-                <img
-                  src={logo}
-                  alt="Western School logo"
-                  className="h-10 w-auto object-contain transition-transform duration-200 hover:scale-105 sm:h-12"
-                />
-              </div>
+        <div className="mx-auto flex max-w-screen-2xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-10">
+          {/* Logo */}
+          <Link to="/" onClick={closeMenu} className="shrink-0">
+            <img
+              src={logo}
+              alt="Western School logo"
+              className="h-14 w-auto object-contain sm:h-16 transition-transform duration-200 hover:scale-105"
+            />
+          </Link>
 
-              <div className="min-w-0">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-sky-700/70 sm:text-[11px]">
-                  Western School
-                </p>
-                <p
-                  className="font-black leading-tight text-slate-800"
-                  style={{ fontSize: "clamp(0.95rem, 2vw, 1.45rem)" }}
-                >
-                  Western English Medium Secondary School
-                </p>
-
-                <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[11px] text-slate-500 sm:text-xs">
-                  <span className="rounded-full bg-slate-100 px-2.5 py-1 font-medium text-slate-600">
-                    Kohalpur-05, Banke
-                  </span>
-                  <span className="hidden rounded-full bg-amber-50 px-2.5 py-1 font-medium text-amber-700 sm:inline-flex">
-                    westernschool@gmail.com
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-rose-50 px-2.5 py-1 font-medium text-rose-600 md:hidden">
-                    <img src={flagGif} alt="Nepal flag" className="h-3.5 w-auto object-contain" />
-                    Nepal
-                  </span>
-                </div>
-              </div>
-            </Link>
-
-            <div className="hidden shrink-0 md:flex items-center gap-3 rounded-2xl border border-sky-100 bg-gradient-to-r from-sky-50 via-white to-rose-50 px-3.5 py-2.5 shadow-sm">
-              <img src={flagGif} alt="Nepal flag" className="h-10 w-auto object-contain" />
-              <div className="text-right">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-400">
-                  Proudly Based In
-                </p>
-                <p className="text-sm font-semibold text-slate-700">Nepal</p>
-              </div>
-            </div>
+          {/* School name */}
+          <div className="flex-1 text-center">
+            <p
+              className="font-extrabold tracking-wide uppercase text-[#c0392b] leading-tight"
+              style={{ fontSize: "clamp(0.85rem, 2vw, 1.4rem)" }}
+            >
+              Western English Medium Secondary School
+            </p>
+            <p className="text-slate-500 text-xs sm:text-sm mt-0.5 hidden sm:block">
+              Kohalpur-05, Banke &nbsp;|&nbsp; westernschool@gmail.com
+            </p>
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Chat on WhatsApp"
+              className="mt-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200 transition-colors hover:bg-emerald-100 sm:hidden"
+            >
+              <svg className="h-4 w-4 fill-current" viewBox="0 0 32 32" aria-hidden="true">
+                <path d="M19.11 17.33c-.28-.14-1.64-.81-1.89-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.85 1.08-.16.18-.31.21-.59.07-.28-.14-1.17-.43-2.23-1.36-.82-.73-1.38-1.63-1.54-1.91-.16-.28-.02-.43.12-.57.13-.13.28-.34.42-.5.14-.16.18-.28.28-.47.09-.18.05-.35-.02-.5-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.47.07-.71.35-.25.28-.95.93-.95 2.27s.97 2.63 1.11 2.82c.14.18 1.9 2.9 4.6 4.06.64.28 1.14.45 1.53.58.64.2 1.22.17 1.68.1.51-.08 1.64-.67 1.87-1.32.23-.65.23-1.21.16-1.33-.07-.12-.25-.18-.52-.32Z" />
+                <path d="M16.02 3.2c-7.08 0-12.82 5.74-12.82 12.81 0 2.27.59 4.48 1.72 6.42L3 29l6.75-1.77a12.78 12.78 0 0 0 6.27 1.61h.01c7.07 0 12.81-5.74 12.81-12.82A12.8 12.8 0 0 0 16.02 3.2Zm0 23.48h-.01a10.64 10.64 0 0 1-5.43-1.49l-.39-.23-4 .05 1.07-3.86-.25-.4a10.62 10.62 0 1 1 9 5.93Z" />
+              </svg>
+            </a>
           </div>
+
+          <a
+            href={WHATSAPP_LINK}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Chat on WhatsApp"
+            className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-600 hover:shadow-emerald-500/35 sm:inline-flex"
+          >
+            <svg className="h-5 w-5 fill-current" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M19.11 17.33c-.28-.14-1.64-.81-1.89-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.85 1.08-.16.18-.31.21-.59.07-.28-.14-1.17-.43-2.23-1.36-.82-.73-1.38-1.63-1.54-1.91-.16-.28-.02-.43.12-.57.13-.13.28-.34.42-.5.14-.16.18-.28.28-.47.09-.18.05-.35-.02-.5-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.47.07-.71.35-.25.28-.95.93-.95 2.27s.97 2.63 1.11 2.82c.14.18 1.9 2.9 4.6 4.06.64.28 1.14.45 1.53.58.64.2 1.22.17 1.68.1.51-.08 1.64-.67 1.87-1.32.23-.65.23-1.21.16-1.33-.07-.12-.25-.18-.52-.32Z" />
+              <path d="M16.02 3.2c-7.08 0-12.82 5.74-12.82 12.81 0 2.27.59 4.48 1.72 6.42L3 29l6.75-1.77a12.78 12.78 0 0 0 6.27 1.61h.01c7.07 0 12.81-5.74 12.81-12.82A12.8 12.8 0 0 0 16.02 3.2Zm0 23.48h-.01a10.64 10.64 0 0 1-5.43-1.49l-.39-.23-4 .05 1.07-3.86-.25-.4a10.62 10.62 0 1 1 9 5.93Z" />
+            </svg>
+          </a>
+
         </div>
       </div>
 

@@ -216,7 +216,6 @@ const GalleryGrid = () => {
           onClose={closeModal}
           onNext={nextPhoto}
           onPrev={prevPhoto}
-          onThumbClick={(i) => setModalState((prev) => ({ ...prev, photoIndex: i }))}
         />
       )}
     </>
