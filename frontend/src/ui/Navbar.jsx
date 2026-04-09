@@ -7,37 +7,20 @@ import {
   publicNavItems,
 } from "../router/publicNavConfig";
 
-// ── class strings ──────────────────────────────────────────────────────────────
-const navLinkBase =
-  "whitespace-nowrap px-3 py-1.5 text-[13.5px] font-semibold tracking-wide text-white transition-colors hover:text-yellow-300 xl:px-4 xl:text-[14px]";
-
-const textNavLinkBase =
-  "inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500 transition hover:text-secondary-color";
-
-const mobileLinkClasses =
-  "block rounded px-4 py-3 text-[15px] font-semibold text-white transition-colors hover:text-yellow-300";
-
-const dropdownLinkClasses =
-  "block px-4 py-2.5 text-[13.5px] font-semibold text-slate-800 transition hover:bg-blue-50 hover:text-blue-800";
-
-// ── social links ───────────────────────────────────────────────────────────────
+// ── Social links data ───────────────────────────────────────────────────────
 const socialLinks = [
   {
     label: "Facebook",
     href: "https://www.facebook.com/groups/187255265389347",
     icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-4 w-4 fill-current"
-        viewBox="0 0 320 512"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 fill-current" viewBox="0 0 320 512">
         <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06H297V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
       </svg>
     ),
   },
 ];
 
-// ── Live Clock ─────────────────────────────────────────────────────────────────
+// ── Live Clock ──────────────────────────────────────────────────────────────
 function NepaliDate() {
   const [now, setNow] = useState(new Date());
   useEffect(() => {
@@ -45,46 +28,38 @@ function NepaliDate() {
     return () => clearInterval(id);
   }, []);
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const ampm = now.getHours() >= 12 ? "PM" : "AM";
   const h12 = (now.getHours() % 12 || 12).toString().padStart(2, "0");
   const m = now.getMinutes().toString().padStart(2, "0");
   const s = now.getSeconds().toString().padStart(2, "0");
   return (
-    <span>
-      {days[now.getDay()]}, {months[now.getMonth()]} {now.getDate()}{" "}
-      {now.getFullYear()} | {h12}:{m}:{s} {ampm}
+    <span className="font-mono text-[11px] tracking-wide">
+      {days[now.getDay()]}, {months[now.getMonth()]} {now.getDate()} {now.getFullYear()} &nbsp;|&nbsp; {h12}:{m}:{s} {ampm}
     </span>
   );
 }
 
-// ── Navbar ─────────────────────────────────────────────────────────────────────
+// ── Navbar ──────────────────────────────────────────────────────────────────
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAcademicsExpanded, setIsAcademicsExpanded] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef(null);
   const location = useLocation();
 
   const academicsActive = useMemo(
-    () =>
-      location.pathname === "/academics" ||
-      location.pathname.startsWith("/academics/"),
+    () => location.pathname === "/academics" || location.pathname.startsWith("/academics/"),
     [location.pathname],
   );
+
+  // Scroll detection for glass effect
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -94,18 +69,14 @@ const Navbar = () => {
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [isMenuOpen]);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");
     const handle = (e) => {
-      if (e.matches) {
-        setIsMenuOpen(false);
-        setIsAcademicsExpanded(false);
-      } else setOpenDropdown(null);
+      if (e.matches) { setIsMenuOpen(false); setIsAcademicsExpanded(false); }
+      else setOpenDropdown(null);
     };
     handle(mq);
     mq.addEventListener("change", handle);
@@ -128,33 +99,33 @@ const Navbar = () => {
   };
 
   return (
-    <div ref={dropdownRef}>
+    <div ref={dropdownRef} className="sticky top-0 z-50">
       {/* ── TOP INFO BAR ── */}
-      <div className="sticky top-0 z-50 bg-[#1a3a6e] text-slate-200 text-[12.5px]">
-        <div className="mx-auto flex max-w-screen-2xl flex-col gap-2 px-2 py-1.5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-10">
-          <div className="flex flex-wrap justify-center gap-4 sm:justify-start">
+      <div
+        className="bg-gradient-to-r from-[#0d2a5a] via-[#1a3a6e] to-[#0d2a5a] text-slate-300 text-[11.5px] border-b border-white/10"
+      >
+        <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-10 py-1.5 gap-2">
+          {/* Left: contact info */}
+          <div className="hidden sm:flex items-center gap-4">
             <span className="flex items-center gap-1.5">
-              <svg
-                className="h-3.5 w-3.5 fill-current text-yellow-300"
-                viewBox="0 0 24 24"
-              >
+              <svg className="h-3 w-3 fill-current text-amber-400 shrink-0" viewBox="0 0 24 24">
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
               </svg>
               Kohalpur 05, Banke
             </span>
+            <span className="text-white/20">|</span>
             <span className="flex items-center gap-1.5">
-              <svg
-                className="h-3.5 w-3.5 fill-current text-yellow-300"
-                viewBox="0 0 24 24"
-              >
+              <svg className="h-3 w-3 fill-current text-amber-400 shrink-0" viewBox="0 0 24 24">
                 <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.61 21 3 14.39 3 6.25c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z" />
               </svg>
               9848940309
             </span>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+
+          {/* Right: clock + social */}
+          <div className="flex flex-1 sm:flex-none items-center justify-between sm:justify-end gap-3">
             <NepaliDate />
-            <span className="text-white/30">|</span>
+            <span className="text-white/20 hidden sm:inline">|</span>
             {socialLinks.map(({ label, href, icon }) => (
               <a
                 key={label}
@@ -162,7 +133,7 @@ const Navbar = () => {
                 aria-label={label}
                 target="_blank"
                 rel="noreferrer"
-                className="text-white hover:text-yellow-300 transition"
+                className="text-slate-400 hover:text-amber-400 transition-colors"
               >
                 {icon}
               </a>
@@ -171,50 +142,52 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ── SCHOOL IDENTITY HEADER — CENTERED ── */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="mx-auto flex max-w-screen-2xl flex-col items-center gap-4 px-6 py-4 lg:flex-row lg:items-center lg:px-10">
-          {/* Left: School Logo */}
-          <Link to="/" onClick={closeMenu} className="shrink-0 ml-10 sm:ml-16">
+      {/* ── SCHOOL IDENTITY HEADER ── */}
+      <div
+        className={`bg-white/95 backdrop-blur-md border-b transition-all duration-300 ${
+          scrolled ? "border-slate-200 shadow-md" : "border-slate-100"
+        }`}
+      >
+        <div className="mx-auto flex max-w-screen-2xl items-center gap-4 px-4 sm:px-6 lg:px-10 py-3">
+          {/* Logo */}
+          <Link to="/" onClick={closeMenu} className="shrink-0">
             <img
               src={logo}
               alt="Western School logo"
-              className="h-16 w-auto object-contain sm:h-20"
+              className="h-14 w-auto object-contain sm:h-16 transition-transform duration-200 hover:scale-105"
             />
           </Link>
 
-          {/* Center: School Name (takes remaining space, centered) */}
-          <div className="flex-1 flex flex-col items-center text-center">
+          {/* School name */}
+          <div className="flex-1 text-center">
             <p
-              className="text-[#c0392b] font-extrabold tracking-wide uppercase"
-              style={{ fontSize: "clamp(1rem, 2.2vw, 1.5rem)" }}
+              className="font-extrabold tracking-wide uppercase text-[#c0392b] leading-tight"
+              style={{ fontSize: "clamp(0.85rem, 2vw, 1.4rem)" }}
             >
               Western English Medium Secondary School
             </p>
-            <p className="text-slate-500 text-sm mt-1">
+            <p className="text-slate-500 text-xs sm:text-sm mt-0.5 hidden sm:block">
               Kohalpur-05, Banke &nbsp;|&nbsp; westernschool@gmail.com
             </p>
           </div>
 
-          {/* Right: Animated Waving Nepal Flag */}
-          <div className="shrink-0 flex items-center justify-center">
-            <img
-              src={flagGif}
-              alt="Nepal flag"
-              className="h-20 w-auto object-contain"
-            />
+          {/* Nepal flag */}
+          <div className="shrink-0 hidden sm:flex items-center">
+            <img src={flagGif} alt="Nepal flag" className="h-14 w-auto object-contain sm:h-16" />
           </div>
         </div>
       </div>
 
       {/* ── NAVIGATION BAR ── */}
       <header
-        className="sticky top-7 z-40 bg-[linear-gradient(135deg,var(--color-secondary-color),var(--color-primary-color))] text-white shadow-md"
+        className={`bg-gradient-to-r from-[#006fd6] via-[#1a5fb4] to-[#cb844a] text-white shadow-lg transition-all duration-300 ${
+          scrolled ? "shadow-[0_4px_24px_rgba(0,111,214,0.35)]" : ""
+        }`}
         ref={dropdownRef}
       >
         <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-10">
-          {/* Desktop nav — centered */}
-          <nav className="hidden lg:flex flex-1 items-center justify-center">
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex flex-1 items-center justify-center gap-1">
             {publicNavItems.map(({ path, label, children }) =>
               children ? (
                 <div
@@ -226,32 +199,35 @@ const Navbar = () => {
                   <Link
                     to={path}
                     onClick={closeMenu}
-                    className={`${navLinkBase} inline-flex items-center gap-1 py-3.5 ${academicsActive ? "text-yellow-300" : ""}`}
+                    className={`inline-flex items-center gap-1 whitespace-nowrap px-4 py-3.5 text-[13.5px] font-semibold tracking-wide transition-colors rounded-sm ${
+                      academicsActive
+                        ? "text-amber-300"
+                        : "text-white/90 hover:text-amber-300"
+                    }`}
                   >
                     {label}
                     <svg
-                      className={`h-3.5 w-3.5 transition ${openDropdown === path ? "rotate-180" : ""}`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
+                      className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                        openDropdown === path ? "rotate-180" : ""
+                      }`}
+                      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m6 9 6 6 6-6"
-                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
                     </svg>
                   </Link>
+
+                  {/* Dropdown */}
                   {openDropdown === path && (
-                    <div className="absolute left-0 top-full z-50 min-w-[200px] bg-white shadow-xl border border-slate-100">
+                    <div className="absolute left-0 top-full z-50 min-w-[220px] glass-card rounded-xl overflow-hidden shadow-2xl animate-fade-in-up">
                       {children.map((child) => (
                         <NavLink
                           key={child.path}
                           to={child.path}
                           onClick={closeMenu}
                           className={({ isActive }) =>
-                            `${dropdownLinkClasses} ${isActive ? "bg-blue-50 text-blue-800" : ""}`
+                            `block px-5 py-3 text-[13px] font-semibold text-slate-700 transition-all hover:bg-blue-50 hover:text-blue-700 hover:pl-6 ${
+                              isActive ? "bg-blue-50 text-blue-700 border-l-2 border-blue-600" : ""
+                            }`
                           }
                         >
                           {child.label}
@@ -267,7 +243,11 @@ const Navbar = () => {
                   end={path === "/"}
                   onClick={closeMenu}
                   className={({ isActive }) =>
-                    `${navLinkBase} py-3.5 ${isActive ? "text-yellow-300" : ""}`
+                    `whitespace-nowrap px-4 py-3.5 text-[13.5px] font-semibold tracking-wide transition-colors ${
+                      isActive
+                        ? "text-amber-300 border-b-2 border-amber-300"
+                        : "text-white/90 hover:text-amber-300"
+                    }`
                   }
                 >
                   {label}
@@ -276,93 +256,75 @@ const Navbar = () => {
             )}
           </nav>
 
-          
-
           {/* Mobile hamburger */}
           <button
             type="button"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((o) => !o)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded border border-white/30 text-white transition hover:border-yellow-300 hover:text-yellow-300 lg:hidden my-2"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/25 text-white transition-all hover:border-amber-300 hover:text-amber-300 hover:bg-white/10 lg:hidden my-2"
           >
             {isMenuOpen ? (
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="1.8"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 6l12 12M18 6L6 18"
-                />
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
               </svg>
             ) : (
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="1.8"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 7h16M4 12h16M4 17h16"
-                />
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
               </svg>
             )}
           </button>
         </div>
 
-        {/* Mobile menu */}
+        {/* ── Mobile menu ── */}
         {isMenuOpen && (
-          <div className="border-t border-white/10 bg-[#1a3a6e] lg:hidden">
-            <div className="mx-auto max-h-[calc(100vh-6rem)] max-w-screen-2xl overflow-y-auto px-4 py-3 sm:px-6">
-              <nav className="flex flex-col gap-0.5">
+          <div className="border-t border-white/15 glass lg:hidden">
+            <div
+              className="mx-auto max-h-[calc(100vh-10rem)] max-w-screen-2xl overflow-y-auto px-4 py-3 sm:px-6"
+              style={{ background: "rgba(13,42,90,0.97)" }}
+            >
+              <nav className="flex flex-col gap-1">
                 {publicNavItems.map(({ path, label, children }) =>
                   children ? (
-                    <div key={path} className="border border-white/10 rounded">
+                    <div key={path} className="rounded-xl overflow-hidden border border-white/10">
                       <div className="flex items-center">
                         <Link
                           to={path}
                           onClick={closeMenu}
-                          className={`${mobileLinkClasses} flex-1 ${academicsActive ? "text-yellow-300" : ""}`}
+                          className={`flex-1 block px-4 py-3 text-[15px] font-semibold transition-colors ${
+                            academicsActive ? "text-amber-300" : "text-white hover:text-amber-300"
+                          }`}
                         >
                           {label}
                         </Link>
                         <button
                           type="button"
                           onClick={() => setIsAcademicsExpanded((o) => !o)}
-                          className="h-10 w-10 flex items-center justify-center text-white hover:text-yellow-300"
+                          className="h-12 w-12 flex items-center justify-center text-white hover:text-amber-300 transition-colors"
                         >
                           <svg
-                            className={`h-4 w-4 transition ${isAcademicsExpanded ? "rotate-180" : ""}`}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
+                            className={`h-4 w-4 transition-transform duration-200 ${
+                              isAcademicsExpanded ? "rotate-180" : ""
+                            }`}
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m6 9 6 6 6-6"
-                            />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m6 9 6 6 6-6" />
                           </svg>
                         </button>
                       </div>
                       {isAcademicsExpanded && (
-                        <div className="border-t border-white/10 flex flex-col gap-0.5 p-2">
+                        <div className="border-t border-white/10 flex flex-col gap-0.5 p-2 bg-white/5">
                           {academicsDropdownItems.map((child) => (
                             <NavLink
                               key={child.path}
                               to={child.path}
                               onClick={closeMenu}
                               className={({ isActive }) =>
-                                `block px-4 py-2.5 text-sm font-semibold rounded transition ${isActive ? "text-yellow-300 underline" : "text-white/85 hover:text-yellow-300"}`
+                                `block px-4 py-2.5 text-sm font-semibold rounded-lg transition-all ${
+                                  isActive
+                                    ? "text-amber-300 bg-white/10"
+                                    : "text-white/80 hover:text-amber-300 hover:bg-white/10"
+                                }`
                               }
                             >
                               {child.label}
@@ -378,7 +340,11 @@ const Navbar = () => {
                       end={path === "/"}
                       onClick={closeMenu}
                       className={({ isActive }) =>
-                        `${mobileLinkClasses} ${isActive ? "text-yellow-300 underline" : ""}`
+                        `block rounded-xl px-4 py-3 text-[15px] font-semibold transition-all ${
+                          isActive
+                            ? "text-amber-300 bg-white/10"
+                            : "text-white hover:text-amber-300 hover:bg-white/10"
+                        }`
                       }
                     >
                       {label}
@@ -386,11 +352,12 @@ const Navbar = () => {
                   ),
                 )}
               </nav>
-              <div className="mt-4 border-t border-white/20 pt-4">
+
+              <div className="mt-4 border-t border-white/15 pt-4">
                 <Link
                   to="/login"
                   onClick={closeMenu}
-                  className="block w-full text-center rounded bg-[#c0392b] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#a93226] transition"
+                  className="block w-full text-center rounded-xl bg-gradient-to-r from-[#c0392b] to-[#e74c3c] px-5 py-3 text-sm font-bold text-white transition-all hover:shadow-lg hover:shadow-red-500/30 hover:scale-[1.02]"
                 >
                   Login
                 </Link>
