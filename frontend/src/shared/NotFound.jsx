@@ -1,14 +1,9 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import usePageGsap from '../hooks/usePageGsap'
 
 const NotFound = () => {
-  const pageRef = useRef(null)
-
-  usePageGsap(pageRef, 'not-found')
-
   return (
-    <div ref={pageRef} className="min-h-screen bg-slate-950 px-4 py-16 sm:px-6 lg:px-10">
+    <div className="min-h-screen bg-slate-950 px-4 py-16 sm:px-6 lg:px-10">
       <section className="mx-auto flex max-w-3xl flex-col items-center justify-center border border-white/10 bg-white/5 px-8 py-20 text-center shadow-2xl shadow-black/20 backdrop-blur">
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary-color">
           404 Error
