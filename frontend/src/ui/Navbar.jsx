@@ -149,7 +149,7 @@ const Navbar = () => {
 
       {/* ── SCHOOL IDENTITY HEADER ── */}
       <div
-        className={`overflow-hidden bg-white/95 backdrop-blur-md transition-all duration-300 ${
+        className={`hidden overflow-hidden bg-white/95 backdrop-blur-md transition-all duration-300 sm:block ${
           scrolled
             ? "max-h-0 -translate-y-2 border-b-0 opacity-0"
             : "max-h-40 translate-y-0 border-b border-slate-100 opacity-100"
